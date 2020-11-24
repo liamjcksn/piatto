@@ -4,6 +4,7 @@ class DishlistsController < ApplicationController
 
   def index
     @dishlists = @user.dishlists
+    @dishlist = Dishlist.new
   end
 
   def show
@@ -14,8 +15,10 @@ class DishlistsController < ApplicationController
     @dishlist = Dishlist.new(dishlist_params)
     @dishlist.user = current_user
     if @dishlist.save
-      redirect_to dishlist_path(@dishlist.id)
+      flash[:success] = "Dishlist successfully created"
+      redirect_to user_dishlists_path(params[:user_id])
     else
+      flash[:error] = "Something went wrong"
       render :index
     end
   end
@@ -24,6 +27,8 @@ class DishlistsController < ApplicationController
   end
 
   def destroy
+    @dishlist.destroy
+    redirect_to user_dishlists_path(current_user)
   end
 
   private
