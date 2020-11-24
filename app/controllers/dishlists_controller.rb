@@ -1,11 +1,13 @@
 class DishlistsController < ApplicationController
   before_action :set_user, only: [:index, :create]
+  before_action :set_dishlist, only: [:show, :update, :destroy]
 
   def index
-    @dishlists = @user.dishlists.all
+    @dishlists = @user.dishlists
   end
 
   def show
+    @dishlist_dishes = @dishlist.dishes
   end
 
   def create
