@@ -3,4 +3,9 @@ class PagesController < ApplicationController
 
   def home
   end
+
+  def discover
+    session[:postcode] = params[:query]
+    redirect_to restaurants_path
+  end
 end

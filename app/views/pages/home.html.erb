@@ -1,4 +1,10 @@
 <div class="container">
-  <h1>The social network for your next meal.</h1>
+  <h1>The social<br>network for<br>your next meal.</h1>
   <p>Discover, share and compare delicious new dishes near you.</p>
+  
+  <%= form_tag("/discover", method: "get") do %>
+    <%= label_tag(:query, "Search for:") %>
+    <%= text_field_tag(:query) %>
+    <%= submit_tag("Search") %>
+  <% end %>
 </div>
