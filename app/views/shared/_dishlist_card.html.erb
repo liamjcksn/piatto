@@ -1,0 +1,9 @@
+<div class="card m-2" style="width: 18rem;">
+  <%= image_tag "pasta.jpeg", alt: "alttext", class: 'card-img-top' %>
+  <div class="card-body">
+    <h5 class="card-title"><%= dishlist.name %></h5>
+    <p><%= link_to dishlist.user.email, user_dishlists_path(dishlist.user_id) %></p>
+    <%= link_to 'View Dishes', user_dishlist_path(dishlist.user_id, dishlist.id), class: "btn btn-primary" %>
+    <%= link_to 'Delete Dishlist', user_dishlist_path(dishlist.user_id, dishlist.id), method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "btn btn-primary" %>
+  </div>
+</div>

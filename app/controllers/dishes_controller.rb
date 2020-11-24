@@ -1,7 +1,7 @@
 class DishesController < ApplicationController
 
   def index
-    @dishes = Diish.all
+    @dishes = Dish.all
   end
 
   def new
@@ -14,6 +14,8 @@ class DishesController < ApplicationController
 
   def create
     @dish = Dish.new(params[:dish])
+    @restaurant = Restaurant.new(params[:restaurant_id])
+    @dish.restaurant = @restaurant
     if @dish.save
       flash[:success] = "Dish successfully created"
       redirect_to @dish
@@ -45,5 +47,5 @@ class DishesController < ApplicationController
   def dish_params
     params.require(:dish).permit(:name)
   end
-
+  
 end
