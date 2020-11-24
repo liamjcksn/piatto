@@ -1,10 +1,12 @@
 class CreateFollowings < ActiveRecord::Migration[6.0]
   def change
     create_table :followings do |t|
-      t.references :follower, foreign_key: { to_table: 'users' }
-      t.references :followee, foreign_key: { to_table: 'users' }
+      t.references :follower
+      t.references :followee
 
       t.timestamps
     end
+    add_foreign_key :followings, :users, column: :follower_id, primary_key: :id
+    add_foreign_key :followings, :users, column: :followee_id, primary_key: :id
   end
 end
