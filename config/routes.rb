@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :dishlist_dishes, only: [ :create, :destroy ]
   root to: 'pages#home'
   get '/discover', to: 'pages#discover', as: 'discover'
+  get '/search', to: 'pages#search', as: 'search'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :dishes
 end
