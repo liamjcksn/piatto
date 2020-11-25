@@ -1,0 +1,12 @@
+<div class="bg-image">
+</div>
+  <div class="bg-text">
+    <h1><%= @restaurant.name %></h1>
+    <p><%= @restaurant.postcode %></p>
+  </div>
+  div.
+  <% @restaurant.dishes.each do |dish|%>
+    <li><%= dish.name %></li>
+    <li><%= dish.description %></li>
+    <li><%= dish.price %></li>
+  <% end %>
