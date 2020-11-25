@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   resources :dishlist_dishes, only: [ :create, :destroy ]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :dishes
-  resources :restaurants, only: :show
+  resources :restaurants, only: [ :show, :index ]
 end
