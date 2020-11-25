@@ -1,0 +1,19 @@
+<h1>Search results for '<%= @query %>'</h1>
+<h2>People</h2>
+<% if @people.length > 0 %>
+  <% @people.each do |person| %>
+    <%= "#{person.first_name} #{person.last_name}" %>
+    <br>
+  <% end %>
+<% else %>
+  <p>Sorry, no users match '<%= @query %>'.</p>
+<% end %>
+<h2>Dishes</h2>
+<% if @dishes.length > 0 %>
+  <% @dishes.each do |dish| %>
+    <%= "#{dish.name} #{dish.description} #{dish.restaurant.name}" %>
+    <br>
+  <% end %>
+<% else %>
+  <p>Sorry, no dishes match '<%= @query %>'.</p>
+<% end %>
