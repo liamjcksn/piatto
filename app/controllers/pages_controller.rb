@@ -12,7 +12,7 @@ class PagesController < ApplicationController
   end
 
   def profile
-    @user = current_user
+    @user = User.find(params[:id])
     @followers = @user.followers
     @followees = @user.followees
     @dishlists = @user.dishlists
