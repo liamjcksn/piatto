@@ -7,7 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
     puts 'creating fake users...'
-    5.times do
+
+    number_of_users = 40
+
+    number_of_users.times do
       user = User.new(
         first_name: "#{Faker::GreekPhilosophers.name}",
         last_name: "#{Faker::Space.planet }",
@@ -18,6 +21,12 @@
       user.save!
     end
 
+    first_set = number_of_users.times.map { rand(1..number_of_users) }
+    second_set = number_of_users.times.map { rand(1..number_of_users) }
+    number_of_users.times do |n|
+      Following.create(follower: User.find(first_set[n - 1]), followee: User.find(second_set[n - 1]))
+    end
+
     puts 'creating fake restaurants...'
     10.times do
       restaurant = Restaurant.new(
@@ -26,7 +35,7 @@
       )
       restaurant.save!
     end
-    
+
     puts 'creating fake dishes...'
     15.times do
       dish = Dish.new(
@@ -39,4 +48,4 @@
     end
 
 
-  
+

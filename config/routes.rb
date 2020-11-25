@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   end
   resources :dishlist_dishes, only: [ :create, :destroy ]
   root to: 'pages#home'
+  get '/discover', to: 'pages#discover', as: 'discover'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :dishes
 end
