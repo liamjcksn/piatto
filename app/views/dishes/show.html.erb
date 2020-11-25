@@ -1,8 +1,9 @@
-<div class="container">
+<h1><%= @dish.name %></h1>
+<h2><%= @dish.restaurant.name %></h2>
+<h5><%= @dish.description %></h5>
 
-
-  <h1><%= @dish.name %> </h1>
-  <h1><%= @dish.restaurant.name %></h1>
-  <h2><%= @dish.description %></h2>
-
+<div class="dflex">
+  <% @dishes.each do |dish| %>
+    <%= render 'shared/dish_card', dish: dish %>
+  <% end %>
 </div>

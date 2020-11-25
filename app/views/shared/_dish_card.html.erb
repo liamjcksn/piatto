@@ -1,5 +1,11 @@
-<div class="container" style="margin: 0 auto">
-  <div class="dish-card" style=margin 5px>
-    
+<div class="dish-card" style="width: 18rem">
+  <%= image_tag "pasta.jpeg", alt: "alttext", class: 'card-img-top' %>
+  <div class="card-body">
+    <h5 class="card-title"><%= dish.name %></h5>
+    <%= simple_form_for DishlistDish.new do |f| %>
+      <%= f.association :dishlist, collection: current_user.dishlists, label: false %>
+      <%= f.input :dish_id, as: :hidden, input_html: { value: dish.id } %>
+      <%= f.submit %>
+    <% end %>
   </div>
 </div>
