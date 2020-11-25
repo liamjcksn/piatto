@@ -1,23 +1,58 @@
 .dish-card {
+  display: flex;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  border-radius: 5px
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 28px !important;
 }
 
-img {
-  border-radius: 5px 5px 0 0;
+.card-body {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%
 }
 
-// .dish-name {
-//   position: absolute;
-//   bottom: 0;
-//   right: 0;
-//   background: white;
-//   padding: 5px 8px 5px;
-// }
+.dish-img {
+  width: 30%;
+  height: 250px;
+  border-radius: 10px 0px 0px 10px;
+  background-size: cover;
+  background-position: center;
+  background-size: cover;
+}
 
-.card:hover {
+.dish-img-holder {
+  width: 100%;
+  height: 80%;
+  position: relative;
+  overflow: hidden;
+}
+
+.dish-name {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: white;
+  padding: 5px 8px 5px;
+}
+
+.dish-details {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.dish-container:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
+.card-body-left {
+  width: 70%;
+}
+
+.card-body-right {
+  width:30%;
+}

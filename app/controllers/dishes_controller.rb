@@ -1,7 +1,6 @@
 class DishesController < ApplicationController
   before_action :set_user, only: [:index, :create]
 
-  
   def index
     @dishes = Dish.all
   end
@@ -30,13 +29,13 @@ class DishesController < ApplicationController
 
   def update
     @dish = Dish.find(params[:id])
-      if @dish.update_attributes(params[:dish])
-        flash[:success] = "Dish was successfully updated"
-        redirect_to @dish
-      else
-        flash[:error] = "Something went wrong"
-        render 'edit'
-      end
+    if @dish.update_attributes(params[:dish])
+      flash[:success] = "Dish was successfully updated"
+      redirect_to @dish
+    else
+      flash[:error] = "Something went wrong"
+      render 'edit'
+    end
   end
 
   def destroy
