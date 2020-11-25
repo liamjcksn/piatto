@@ -12,7 +12,7 @@
   <!-- <hr class="sb-hr"/> -->
   <div class="sb-link-box">
     <div class="sb-selector"></div>
-    <%= link_to '#', class: 'sb-link sb-my' do %>
+    <%= link_to user_dishlists_path(current_user.id), class: 'sb-link sb-my' do %>
       <%= image_tag("pilibrary", class: 'sb-icon') %>
       <p>My dishlists</p>
     <% end %>

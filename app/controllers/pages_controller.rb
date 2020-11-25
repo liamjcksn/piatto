@@ -10,4 +10,11 @@ class PagesController < ApplicationController
       session[:postcode] = params[:query]
     end
   end
+
+  def profile
+    @user = current_user
+    @followers = @user.followers
+    @followees = @user.followees
+    @dishlists = @user.dishlists
+  end
 end

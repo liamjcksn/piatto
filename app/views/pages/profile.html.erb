@@ -1,0 +1,26 @@
+<h1>Your profile</h1>
+<div class="container">
+  <div class="dishlist-box">
+    <h5><%= @user.email %> dishlists</h5>
+    <div class="dishlists d-flex">
+      <% @dishlists.each do |dishlist| %>
+        <%= render 'shared/dishlist_card', dishlist: dishlist %>
+      <% end %>
+    </div>
+  </div>
+  <div class="followings d-flex">
+    <div class="followers">
+      <h5>Follwers</h5>
+      <% @followers.each do |follower| %>
+        <p><%= link_to "#{follower.first_name} #{follower.last_name}", profile_path(follower.id) %></p>
+      <% end %>
+    </div>
+    <div class="followee">
+      <h5>Following</h5>
+      <% @followees.each do |followee| %>
+        <p><%= link_to "#{followee.first_name} #{followee.last_name}", profile_path(followee.id) %></p>
+      <% end %>
+    </div>
+  </div>
+
+</div>
