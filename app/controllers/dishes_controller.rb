@@ -1,5 +1,7 @@
 class DishesController < ApplicationController
+  before_action :set_user, only: [:index, :create]
 
+  
   def index
     @dishes = Dish.all
   end
@@ -9,6 +11,7 @@ class DishesController < ApplicationController
   end
 
   def show
+    index
     @dish = Dish.find(params[:id])
   end
 
