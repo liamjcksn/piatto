@@ -31,6 +31,9 @@
     10.times do
       restaurant = Restaurant.new(
         name: "#{Faker::Restaurant.name}",
+        latitude: "#{Faker::Address.latitude}",
+        longitude: "#{Faker::Address.longitude}",
+        postcode: "#{Faker::Address.postcode}"
         # description: "#{Faker::Restaurant.description}"
       )
       restaurant.save!
