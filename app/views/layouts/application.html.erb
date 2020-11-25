@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Piatto</title>
+    <title>Piatto | Great dishes near you</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,9 +12,16 @@
   </head>
 
   <body>
-    <%= render 'shared/navbar' %>
+    <% full_page = (current_page?('/') || devise_controller?) %>
     <%= render 'shared/flashes' %>
-
-    <%= yield %>
+    <% if full_page %>
+      <%= yield %>
+    <% else %>
+      <%= render 'shared/sidebar' %>
+      <div style="margin-left: 270px; padding: 0px 10px; position: absolute;">
+        <%= render 'shared/topbar' %>
+        <%= yield %>
+      </div>
+    <% end %>
   </body>
 </html>
