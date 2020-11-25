@@ -4,9 +4,15 @@
     <h1><%= @restaurant.name %></h1>
     <p><%= @restaurant.postcode %></p>
   </div>
-  div.
   <% @restaurant.dishes.each do |dish|%>
-    <li><%= dish.name %></li>
-    <li><%= dish.description %></li>
-    <li><%= dish.price %></li>
+    <div class="card-product">
+    <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8bWVhbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=500&q=60" />
+      <div class="card-product-infos">
+        <h2><%= dish.name %></h2>
+        <p><%= dish.description %></p>
+        <p>£<%= dish.price %></p>
+      </div>
+    </div>
   <% end %>
+  
+  
