@@ -1,0 +1,14 @@
+<h1>Dishlists</h1>
+
+<div class="m-3">
+  <%= simple_form_for([ @user, @dishlist ], remote: true) do |f| %>
+    <%= f.input :name, placeholder: "Create a new Dishlist..." ,label: false %>
+    <%= f.submit %>
+  <% end %>
+</div>
+
+<div class="d-flex">
+  <% @dishlists.each do |dishlist| %>
+    <%= render 'shared/dishlist_card', dishlist: dishlist %>
+  <% end %>
+</div>

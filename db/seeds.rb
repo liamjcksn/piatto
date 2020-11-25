@@ -41,7 +41,8 @@
       dish = Dish.new(
         name: "#{Faker::Food.dish}",
         description: "#{Faker::Food.description}",
-        restaurant_id: rand(1..10)
+        restaurant_id: rand(1..10),
+        price: rand(1..20)
       )
       dish.save!
     end
