@@ -12,14 +12,14 @@
   </head>
 
   <body>
-    <% full_page = (current_page?('/') || devise_controller?) %>
+    <% full_page = (current_page?('/') || devise_controller?) && (!current_page?(edit_user_registration_path(current_user))) %>
     <%= render 'shared/flashes' %>
     <% if full_page %>
       <%= yield %>
     <% else %>
       <%= render 'shared/sidebar' %>
-      <div style="margin-left: 270px; padding: 0px 10px; position: absolute;">
-        <%= render 'shared/topbar' %>
+      <div style="margin-left: 270px; padding: 0px 10px;">
+        <%= render 'shared/navbar' %>
         <%= yield %>
       </div>
     <% end %>
