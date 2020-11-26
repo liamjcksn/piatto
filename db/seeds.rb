@@ -5,22 +5,26 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+    require 'open-uri'
+
+
+    number_of_users = 50
 
     puts 'creating fake users...'
-
-    number_of_users = 40
-
-    number_of_users.times do
+    number_of_users.times do |n|
+      username = Faker::Internet.user_name
+      username = "#{username}_#{n}"
       user = User.new(
         first_name: "#{Faker::GreekPhilosophers.name}",
         last_name: "#{Faker::Space.planet }",
-        username: "#{Faker::Name.unique.clear}",
+        username: username,
         email: "#{Faker::Internet.email}",
         password: 'piattopassword12345'
       )
       user.save!
     end
 
+    puts 'creating followings...'
     first_set = number_of_users.times.map { rand(1..number_of_users) }
     second_set = number_of_users.times.map { rand(1..number_of_users) }
     number_of_users.times do |n|

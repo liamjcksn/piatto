@@ -1,7 +1,14 @@
 .navbar-lewagon {
   justify-content: flex-end;
+  align-items: center;
   width: 100%;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: $light-gray;
+  height: 70px;
+}
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
@@ -9,6 +16,7 @@
 
 .dropdown-toggle {
   transition: all .2s;
+  margin: 0;
 }
 
 .dropdown-toggle:hover {
@@ -18,4 +26,14 @@
 
 .dropdown-toggle::after {
   display: none;
+}
+
+.navbar-lewagon:after {
+  content: '';
+  width: calc(100% - 330px);
+  height: 1px;
+  background: rgba(50, 50, 50, 0.2);
+  position: absolute;
+  bottom: 0px;
+  left: 300px;
 }

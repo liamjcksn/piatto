@@ -1,0 +1,48 @@
+<h1 class="text-center mb-3"><%= @user.first_name %>'s profile</h1>
+
+<div class="container">
+
+  <div class="profile-information d-flex">
+    <%= image_tag "pasta.jpeg", alt: "alttext", width: '150px', height: '100px', class: "profile-img" %>
+    <div class="info w-75">
+      <h5 class="profile-h5">User</h5>
+      <h5><%= @user.username %></h5>
+      <div class="dishlist-box">
+        <h5><%= link_to "View #{@user.first_name}'s #{@dishlists.count} Dishlists", user_dishlists_path(params[:id]) %></h5>
+        <% if current_user == @user %>
+          <%= link_to "Edit Profile", edit_user_registration_path(current_user.id), class: 'btn btn-primary mt-3' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="followings">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Followers</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Following</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active mt-2" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <% @followees.each do |followee| %>
+          <div class="follows">
+            <!-- Add Small Profile avatar -->
+            <%= link_to "#{followee.first_name} #{followee.last_name}", profile_path(followee.id) %>
+            <span><%= followee.followers.count %> Followers</span>
+          </div>
+        <% end %>
+      </div>
+      <div class="tab-pane fade mt-2" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <% @followers.each do |follower| %>
+          <div class="follows">
+            <!-- Add Small Profile avatar -->
+            <%= link_to "#{follower.first_name} #{follower.last_name}", profile_path(follower.id) %>
+            <span><%= follower.followers.count %> Followers</span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>

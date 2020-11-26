@@ -11,11 +11,13 @@ class DishlistDishesController < ApplicationController
   def destroy
     @dishlist_dish = DishlistDish.find(params[:id])
     @dishlist_dish.destroy
+    redirect_to user_dishlists_path(current_user)
   end
 
   private
 
   def set_dishlist
+    @dishlist = Dishlist.find(params[:id])
   end
 
   def strong_params

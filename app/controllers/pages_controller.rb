@@ -6,11 +6,18 @@ class PagesController < ApplicationController
 
   def discover
     @people_you_follow = current_user.followees
-    if params[:query].present?
-      session[:postcode] = params[:query]
+    if params[:postcode].present?
+      session[:postcode] = params[:postcode]
     end
   end
 
+  def profile
+    @user = User.find(params[:id])
+    @followers = @user.followers
+    @followees = @user.followees
+    @dishlists = @user.dishlists
+  end
+  
   def search
     if params[:query].present? && params[:query].length < 200
       @query = params[:query]
