@@ -1,11 +1,18 @@
-<div class="dish-card" style="width: 18rem">
-  <%= image_tag "pasta.jpeg", alt: "alttext", class: 'card-img-top' %>
+<div class="dish-card" style="margin: 0 auto">
+  <div class="dish-img" style="background-image: url(<%= image_path('pasta.jpeg') %>);"></div>
   <div class="card-body">
-    <h5 class="card-title"><%= dish.name %></h5>
-    <%= simple_form_for DishlistDish.new do |f| %>
+    <div class="card-body-left">
+      <h3><%= dish.name %></h3>
+      <h3><em><%= dish.restaurant.name %></em></h3>
+      <h3>£<%= dish.price %></h3>
+      <h5><%= dish.description %></h5>
+    </div>
+    <div class="card-body-right">
+      <%= simple_form_for DishlistDish.new do |f| %>
       <%= f.association :dishlist, collection: current_user.dishlists, label: false %>
       <%= f.input :dish_id, as: :hidden, input_html: { value: dish.id } %>
       <%= f.submit %>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
