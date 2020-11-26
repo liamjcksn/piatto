@@ -8,7 +8,10 @@ Rails.application.routes.draw do
     resources :dishlists, only: [ :index, :show, :create, :update, :destroy ]
   end
   
+  resources :dishes do
+    resources :reviews, only: [ :create ]
+  end
   resources :dishlist_dishes, only: [ :create, :destroy ]
-  resources :dishes
   resources :restaurants, only: [ :show ]
+  resources :reviews, only: [ :destroy ]
 end

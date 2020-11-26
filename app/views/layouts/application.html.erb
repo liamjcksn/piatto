@@ -20,7 +20,10 @@
       <%= render 'shared/sidebar' %>
       <div style="margin-left: 270px; padding: 0px 10px;">
         <%= render 'shared/navbar' %>
-        <%= yield %>
+        <div class="min-height">
+          <%= yield %>
+        </div>
+        <%= render 'shared/footer' %>
       </div>
     <% end %>
   </body>

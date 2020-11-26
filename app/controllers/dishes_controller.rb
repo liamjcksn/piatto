@@ -12,6 +12,7 @@ class DishesController < ApplicationController
   def show
     index
     @dish = Dish.find(params[:id])
+    @review = Review.new
   end
 
   def create

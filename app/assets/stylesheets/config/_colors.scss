@@ -6,6 +6,11 @@ $orange: #FFAC41;
 $light-gray: #F1F1F1;
 $gray: #0E0000;
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   background-color: $light-gray;
 }
