@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_many :followed_users, class_name: 'Following', foreign_key: 'follower_id' # , primary_key: 'id'
   has_many :followees, through: :followed_users
 
+  has_one_attached :avatar
+
   # def followers
   #   self.follower_objects.all.map { |f| User.find(f.follower_id) }
   # end
