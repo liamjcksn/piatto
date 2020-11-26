@@ -1,7 +1,13 @@
 .navbar-lewagon {
   justify-content: flex-end;
   width: 100%;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: $light-gray;
+  height: 85px;
+}
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
