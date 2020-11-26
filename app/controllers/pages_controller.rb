@@ -17,7 +17,7 @@ class PagesController < ApplicationController
     @followees = @user.followees
     @dishlists = @user.dishlists
   end
-  
+
   def search
     if params[:query].present? && params[:query].length < 200
       @query = params[:query]
@@ -26,5 +26,11 @@ class PagesController < ApplicationController
     else
       redirect_to discover_path
     end
+  end
+
+  def postcode
+    @postcode = params[:postcode]
+    raise
+    redirect_to restaurant_path(@restaurant.id)
   end
 end
