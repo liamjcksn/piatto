@@ -1,0 +1,23 @@
+.user-card {
+  box-shadow: 0 0 30px rgba(50, 50, 50, 0.1);
+  border-radius: 10px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin: 15px;
+}
+
+.uc-name {
+  margin: 0;
+  text-align: center;
+  width: 90%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.uc-username {
+  font-style: italic;
+  font-size: 10px;
+}

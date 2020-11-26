@@ -1,0 +1,8 @@
+.search-people-scroll {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: calc(100% - 20px);
+  overflow-x: scroll;
+  padding: 20px;
+}

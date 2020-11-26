@@ -1,18 +1,18 @@
-<h1>Search results for '<%= @query %>'</h1>
+<h1 style="width: calc(100vw - 330px); height: 80px; overflow-x: hidden; overflow-y: hidden; white-space: nowrap; text-overflow: ellipsis;">Search results for <span style="opacity: 40%; font-style: italic;">&ldquo;<%= @query %>&rdquo;</span></h1>
 <h2>People</h2>
 <% if @people.length > 0 %>
-  <% @people.each do |person| %>
-    <%= "#{person.first_name} #{person.last_name}" %>
-    <br>
-  <% end %>
+  <div class="search-people-scroll">
+    <% @people.each do |person| %>
+      <%= render 'shared/user_card', user: person %>
+    <% end %>
+  </div>
 <% else %>
   <p>Sorry, no users match '<%= @query %>'.</p>
 <% end %>
 <h2>Dishes</h2>
 <% if @dishes.length > 0 %>
   <% @dishes.each do |dish| %>
-    <%= "#{dish.name} #{dish.description} #{dish.restaurant.name}" %>
-    <br>
+    <%= render 'shared/dish_card', dish: dish %>
   <% end %>
 <% else %>
   <p>Sorry, no dishes match '<%= @query %>'.</p>
