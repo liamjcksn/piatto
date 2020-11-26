@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/discover', to: 'pages#discover', as: 'discover'
   get '/profile/:id', to: 'pages#profile', as: 'profile'
   get '/search', to: 'pages#search', as: 'search'
+  resources :followings, only: [ :create, :destroy ]
  
   devise_for :users, path: 'accounts'
   resources :users do
