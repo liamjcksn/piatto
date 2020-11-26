@@ -2,10 +2,10 @@
   <div class="dish-img" style="background-image: url(<%= image_path('pasta.jpeg') %>);"></div>
   <div class="card-body">
     <div class="card-body-left">
-      <h3><%= dish.name %></h3>
-      <h3><em><%= dish.restaurant.name %></em></h3>
-      <h3>£<%= dish.price %></h3>
-      <h5><%= dish.description %></h5>
+      <h5><%= dish.name %></h5>
+      <h5><em><%= dish.restaurant.name %></em></h5>
+      <h5>£<%= dish.price %></h5>
+      <p><%= dish.description %></p>
     </div>
     <div class="card-body-right">
       <%= simple_form_for DishlistDish.new do |f| %>

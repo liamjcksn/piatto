@@ -1,0 +1,33 @@
+<div class="container mb-10">
+  <div id="form-width">
+    <%= simple_form_for [@dish, @review], remote: true do |f| %>
+      <%= f.input :rating, collection: 1..5 %>
+      <%= f.input :content %>
+      <div class="btn-width mx-auto">
+        <%= f.submit class: "create-btn button-center" %>
+      </div>
+    <% end %>
+  <div class="list-group list-reviews">
+    <% @dish.reviews.each do |review| %>
+      <p id="review-<%= review.id %>"></p>
+        <li class="list-group-item reviews mb-2">
+          <%= review.user.first_name || review.user.email %>
+            <% if review.user == current_user %>
+              <%= link_to review_path(review),
+                method: :delete,
+                data: { confirm: "Are you sure?" } do %>
+                <i class="fas fa-trash-alt"></i>
+              <% end %>
+            <% end %>
+            <small>
+              <% review.rating.times do %>
+                <i class="fas fa-star"></i>
+              <% end %>
+
+            </small>
+            <p><%= review.content %></p>
+        </li>
+    <% end %>
+  </div>
+  </div>
+</div>
