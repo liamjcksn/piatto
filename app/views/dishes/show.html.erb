@@ -2,10 +2,9 @@
   <h1><%= @dish.name %></h1>
   <h2><%= @dish.restaurant.name %></h2>
   <h5><%= @dish.description %></h5>
-
-  <p>Leave a review!</p>
   <%= render 'review' %>
-
+  <br>
+  <br>
   <% @dishes.each do |dish| %>
     <%= render 'shared/dish_card', dish: dish %>
   <% end %>
