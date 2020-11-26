@@ -1,5 +1,5 @@
 class DishlistsController < ApplicationController
-  before_action :set_user, only: [:index, :create]
+  before_action :set_user, only: [:index, :create ]
   before_action :set_dishlist, only: [:show, :update, :destroy]
 
   def index
@@ -8,7 +8,8 @@ class DishlistsController < ApplicationController
   end
 
   def show
-    @dishlist_dishes = @dishlist.dishes
+    @dishlist_dishes = @dishlist.dishlist_dishes
+    @dishes = @dishlist.dishes
   end
 
   def create
@@ -34,7 +35,7 @@ class DishlistsController < ApplicationController
   private
 
   def set_user
-    @user = current_user
+    @user = User.find(params[:user_id])
   end
 
   def set_dishlist
