@@ -6,8 +6,8 @@ class PagesController < ApplicationController
 
   def discover
     @people_you_follow = current_user.followees
-    if params[:query].present?
-      session[:postcode] = params[:query]
+    if params[:postcode].present?
+      session[:postcode] = params[:postcode]
     end
   end
 

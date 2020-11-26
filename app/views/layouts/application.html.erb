@@ -18,9 +18,11 @@
       <%= yield %>
     <% else %>
       <%= render 'shared/sidebar' %>
-      <div style="margin-left: 270px; padding: 0px 10px;">
+      <div style="margin-left: 270px;">
         <%= render 'shared/navbar' %>
-        <%= yield %>
+        <div style="margin-top: 85px; padding: 10px;">
+          <%= yield %>
+        </div>
       </div>
     <% end %>
   </body>
