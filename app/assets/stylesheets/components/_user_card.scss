@@ -6,7 +6,19 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  color: black;
   margin: 15px;
+  &:hover {
+    text-decoration: none;
+  }
+  text-decoration: none;
+}
+
+.uc-link {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .uc-name {
@@ -15,9 +27,19 @@
   width: 90%;
   text-overflow: ellipsis;
   white-space: nowrap;
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .uc-username {
   font-style: italic;
   font-size: 10px;
+  text-align: center;
+  width: 90%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  &:hover {
+    text-decoration: none;
+  }
 }
