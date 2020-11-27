@@ -4,9 +4,5 @@
     <p class="uc-name"><%= "#{user.first_name} #{user.last_name}" %></p>
     <p class="uc-username"><%= user.username == '{}' ? 'No username' : user.username %></p>
   <% end %>
-    <% if user != current_user && !user.followees.include?(current_user) %>
-    <%= link_to "Follow", followings_path(id: user.id), method: "POST", class: 'btn btn-primary mb-2' %>
-    <% else user.followees.include?(current_user) %>
-    <%= link_to "Unfollow", following_path(id: user.id), method: "DELETE", class: 'btn btn-primary mb-2' %>
-    <% end %>
+    <%= render "shared/follow_btn", user: user %>
 </div>
