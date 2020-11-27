@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get '/discover', to: 'pages#discover', as: 'discover'
   get '/profile/:id', to: 'pages#profile', as: 'profile'
   get '/search', to: 'pages#search', as: 'search'
-  post '/postcode/:postcode', to: 'pages#postcode', as: 'postcode'
+  post 'postcode', to: 'pages#postcode'
 
   devise_for :users, path: 'accounts'
   resources :users do
@@ -12,5 +12,5 @@ Rails.application.routes.draw do
 
   resources :dishlist_dishes, only: [ :create, :destroy ]
   resources :dishes
-  resources :restaurants, only: [ :show ]
+  resources :restaurants, only: [ :show, :create ]
 end
