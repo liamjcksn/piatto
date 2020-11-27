@@ -1,6 +1,12 @@
-<div class="bg-image"></div>
-  <div class="bg-text">
-    <h1><%= @restaurant.name %></h1>
-    <p><%= @restaurant.postcode %></p>
+<div class="restaurant-show">
+  <div class="bg-image"></div>
+    <div class="bg-text">
+      <h1><%= @restaurant.name %></h1>
+      <p><%= @restaurant.postcode %></p>
   </div>
-  <%= render  "shared/res_dish_card" %>
+  <div class="restaurant-dishes">
+    <% @dish.each do |dish| %>
+      <%= render "shared/dish_card", dish: dish %>
+    <% end %>
+  </div>
+</div>
