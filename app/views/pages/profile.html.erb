@@ -1,6 +1,6 @@
 <h1 class="text-center mb-3"><%= @user.first_name %>'s profile</h1>
 
-<div class="container">
+<div class="container" style="height: calc(100vh - 200px);">
 
   <div class="profile-information d-flex">
     <%= image_tag "pasta.jpeg", alt: "alttext", width: '150px', height: '100px', class: "profile-img" %>
@@ -12,6 +12,11 @@
         <% if current_user == @user %>
           <%= link_to "Edit Profile", edit_user_registration_path(current_user.id), class: 'btn btn-primary mt-3' %>
         <% end %>
+        <% if @user != current_user && !@user.followees.include?(current_user) %>
+            <%= link_to "Follow", followings_path(id: @user.id), method: "POST", class: 'btn btn-primary mb-2' %>
+        <% elsif @user.followees.include?(current_user) %>
+            <%= link_to "Unfollow", following_path(id: @user.id), method: "DELETE", class: 'btn btn-primary mb-2' %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -19,10 +24,10 @@
   <div class="followings">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Following <%= "(#{@user.followees.count})" %></a>
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Followers <%= "(#{@user.followees.count})" %></a>
       </li>
       <li class="nav-item" role="presentation">
-        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Followers <%= "(#{@user.followers.count})" %></a>
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Following <%= "(#{@user.followers.count})" %></a>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
