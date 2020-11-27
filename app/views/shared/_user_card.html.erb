@@ -1,7 +1,8 @@
-<%= link_to user_dishlists_path(user), class: 'uc-link' do %>
-  <div class="user-card">
+<div class="user-card">
+  <%= link_to user_dishlists_path(user), class: 'uc-link' do %>
     <%= avatar_tag user: user, class: 'rounded-circle m-3', width: 150, height: 150 %>
     <p class="uc-name"><%= "#{user.first_name} #{user.last_name}" %></p>
     <p class="uc-username"><%= user.username == '{}' ? 'No username' : user.username %></p>
-  </div>
-<% end %>
+  <% end %>
+    <%= render "shared/follow_btn", user: user %>
+</div>
