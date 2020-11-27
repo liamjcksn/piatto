@@ -6,6 +6,17 @@
   }
 }
 
+.front-img {
+  width: 50vw;
+  height: 80vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
 .search-form .form-input {
   height: 3em;
   .btn {
