@@ -1,11 +1,11 @@
 <h1>Discover</h1>
 <div class="container">
-  <h2>People you follow have been enjoying</h2>
+<h2>People you follow have been enjoying</h2>
+  <div class="row">
+    <% 3.times do %>
+      <div class="col-12 col-md-4 mt-3">
+      <%= render 'shared/discover_card' %>
+      </div>
+    <% end %>
+  </div>
 </div>
-<div class="container">
-  <h2>Dinner, based on your preferences</h2>
-</div>
-<div class="container">
- <h2>People you follow</h2>
-</div>
-
