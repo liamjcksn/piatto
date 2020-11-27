@@ -2,7 +2,7 @@
   <div class="dish-img" style="background-image: url(<%= image_path('pasta.jpeg') %>);"></div>
   <div class="card-body">
     <div class="card-body-left">
-      <h5><%= dish.name %></h5>
+      <h5><%= link_to dish.name, dish_path(dish) %></h5>
       <h5><em><%= link_to dish.restaurant.name, restaurant_path(dish.restaurant.id) %></em></h5>
       <h5>£<%= dish.price %></h5>
       <p><%= dish.description %></p>
