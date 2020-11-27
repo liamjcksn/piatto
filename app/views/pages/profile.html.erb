@@ -3,7 +3,7 @@
 <div class="container" style="height: calc(100vh - 200px);">
 
   <div class="profile-information d-flex">
-    <%= image_tag "pasta.jpeg", alt: "alttext", width: '150px', height: '100px', class: "profile-img" %>
+    <%= avatar_tag user: @user, class: "profile-img" %>
     <div class="info w-75">
       <h5 class="profile-h5">User</h5>
       <h5><%= @user.username %></h5>
