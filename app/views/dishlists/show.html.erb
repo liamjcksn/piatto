@@ -6,9 +6,9 @@
     <div class="card-body">
       <div class="card-body-left">
         <h3><%= dishlist_dish.dish.name %></h3>
-        <h3><em><%= dishlist_dish.dish.restaurant.name %></em></h3>
-        <h3>£<%= dishlist_dish.dish.price %></h3>
-        <h5><%= dishlist_dish.dish.description %></h5>
+        <h5><em><%= link_to dishlist_dish.dish.restaurant.name, restaurant_path(dishlist_dish.dish.restaurant.id) %></em></h5>
+        <h5>£<%= dishlist_dish.dish.price %></h5>
+        <p><%= dishlist_dish.dish.description %></p>
       </div>
       <% if @dishlist.user == current_user %>
         <div class="card-body-right">
