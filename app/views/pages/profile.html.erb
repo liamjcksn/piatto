@@ -31,7 +31,7 @@
           <div class="follows">
             <!-- Add Small Profile avatar -->
             <%= link_to "#{followee.first_name} #{followee.last_name}", profile_path(followee.id) %>
-            <span><%= followee.followers.count %> Followers</span>
+            <span><%= followee.followees.count %> Followers</span>
           </div>
         <% end %>
       </div>
@@ -40,7 +40,7 @@
           <div class="follows">
             <!-- Add Small Profile avatar -->
             <%= link_to "#{follower.first_name} #{follower.last_name}", profile_path(follower.id) %>
-            <span><%= follower.followers.count %> Followers</span>
+            <span><%= follower.followees.count %> Followers</span>
           </div>
         <% end %>
       </div>

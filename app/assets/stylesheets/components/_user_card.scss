@@ -14,8 +14,16 @@
   text-decoration: none;
 }
 
+.user-card {
+  p {
+    width: 100%;
+    text-align: center;
+  }
+}
+
 .uc-link {
   text-decoration: none;
+  color: #000;
   &:hover {
     text-decoration: none;
   }
