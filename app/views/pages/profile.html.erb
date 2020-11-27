@@ -3,7 +3,7 @@
 <div class="container" style="height: calc(100vh - 200px);">
 
   <div class="profile-information d-flex">
-    <%= avatar_tag user: @user, class: "profile-img" %>
+    <%= avatar_tag user: @user, class: "profile-img", width: 200, height: 200 %>
     <div class="info w-75">
       <h5 class="profile-h5">User</h5>
       <h5><%= @user.username %></h5>
@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <div class="followings">
+  <div class="followings" style="overflow: scroll; height: 400px; margin: 30px;">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Followers <%= "(#{@user.followees.count})" %></a>
@@ -32,21 +32,25 @@
     </ul>
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active mt-2" id="home" role="tabpanel" aria-labelledby="home-tab">
-        <% @followees.each do |followee| %>
+        <% @user.followees.each do |followee| %>
+        <div style="display: flex; align-items: center; flex-direction: row;">
+          <%= avatar_tag user: followee, width: 40, height: 40, class: "m-3 rounded-circle" %>
           <div class="follows">
-            <!-- Add Small Profile avatar -->
             <%= link_to "#{followee.first_name} #{followee.last_name}", profile_path(followee.id) %>
             <span><%= followee.followees.count %> Followers</span>
           </div>
+        </div>
         <% end %>
       </div>
       <div class="tab-pane fade mt-2" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        <% @followers.each do |follower| %>
+        <% @user.followers.each do |follower| %>
+        <div style="display: flex; align-items: center; flex-direction: row;">
+        <%= avatar_tag user: follower, width: 40, height: 40, class: "m-3 rounded-circle" %>
           <div class="follows">
-            <!-- Add Small Profile avatar -->
             <%= link_to "#{follower.first_name} #{follower.last_name}", profile_path(follower.id) %>
             <span><%= follower.followees.count %> Followers</span>
           </div>
+        </div>
         <% end %>
       </div>
     </div>

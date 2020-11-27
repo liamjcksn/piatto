@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :followings, only: [ :create, :destroy ]
 
 
-  devise_for :users, path: 'accounts'
+  devise_for :users, path: 'accounts', :controllers => {:registrations => "my_devise/registrations"}
   resources :users do
     resources :dishlists, only: [ :index, :show, :create, :update, :destroy ]
   end
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :dishes do
     resources :reviews, only: [ :create ]
   end
-  
+
   resources :dishlist_dishes, only: [ :create, :destroy ]
   resources :reviews, only: [ :destroy ]
 end

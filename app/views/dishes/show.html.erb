@@ -12,7 +12,7 @@
           <%= simple_form_for DishlistDish.new do |f| %>
           <%= f.association :dishlist, collection: current_user.dishlists, label: false %>
           <%= f.input :dish_id, as: :hidden, input_html: { value: @dish.id } %>
-          <%= f.submit %>
+          <%= f.submit 'Add to dishlist' %>
           <% end %>
         </div>
     </div>
