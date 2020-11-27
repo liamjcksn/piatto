@@ -1,0 +1,7 @@
+<% if user != current_user && !user.followees.include?(current_user) %>
+    <%= link_to "Follow", followings_path(id: user.id), method: "POST", class: 'btn btn-primary mb-2' %>
+<% elsif user.followees.include?(current_user) %>
+    <%= link_to "Unfollow", following_path(id: user.id), method: "DELETE", class: 'btn btn-primary mb-2' %>
+<% elsif user.id = current_user.id %>
+    <%= link_to "See your profile", profile_path(id: user.id), class: 'btn btn-primary mb-2' %>
+<% end %>

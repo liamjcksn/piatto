@@ -7,16 +7,15 @@
 #   Character.create(name: 'Luke', movie: movies.first)
     require 'open-uri'
 
-
     number_of_users = 50
 
     puts 'creating fake users...'
     number_of_users.times do |n|
-      username = Faker::Internet.user_name
+      username = Faker::Internet.username
       username = "#{username}_#{n}"
       user = User.new(
-        first_name: "#{Faker::GreekPhilosophers.name}",
-        last_name: "#{Faker::Space.planet }",
+        first_name: "#{Faker::Name.first_name}",
+        last_name: "#{Faker::Name.last_name}",
         username: username,
         email: "#{Faker::Internet.email}",
         password: 'piattopassword12345'
@@ -47,7 +46,7 @@
     15.times do
       dish = Dish.new(
         name: "#{Faker::Food.dish}",
-        description: "#{Faker::Food.description}",
+        description: "#{Faker::Lorem.sentences(number: rand(3..5)).join("")}",
         restaurant_id: rand(1..10),
         price: rand(1..20)
       )
