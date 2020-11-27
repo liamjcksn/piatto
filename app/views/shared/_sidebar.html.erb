@@ -5,7 +5,7 @@
   <div class="sb-link-box">
     <div class="sb-selector <%= 'sb-active' if current_page?('/discover') %>"></div>
     <%= link_to discover_path, class: 'sb-link sb-disco' do %>
-      <%= image_tag("pihome", class: 'sb-icon') %>
+      <%= image_tag("pihome.svg", class: 'sb-icon') %>
       <p>Discover</p>
     <% end %>
   </div>
@@ -13,13 +13,13 @@
   <div class="sb-link-box">
     <div class="sb-selector <%= 'sb-active' if (controller_name.eql? "dishlists") && (action_name.eql? "index") && (params[:user_id].eql? current_user.id.to_s) %>"></div>
     <%= link_to user_dishlists_path(current_user), class: 'sb-link sb-my' do %>
-      <%= image_tag("pilibrary", class: 'sb-icon') %>
+      <%= image_tag("pilibrary.svg", class: 'sb-icon') %>
       <p>My dishlists</p>
     <% end %>
   </div>
   <!-- <hr class="sb-hr"/> -->
   <%= form_tag search_path, method: :get, class: 'sb-search-field' do %>
-      <%= image_tag "pisearch", class: 'sb-icon sb-search-icon' %>
+      <%= image_tag "pisearch.svg", class: 'sb-icon sb-search-icon' %>
     <%= text_field_tag :query, params[:query], class: "form-control sb-search", placeholder: "People, dishes", required: true %>
   <% end %>
 
