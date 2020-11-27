@@ -7,12 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
     require 'open-uri'
 
-
     number_of_users = 50
 
     puts 'creating fake users...'
     number_of_users.times do |n|
-      username = Faker::Internet.user_name
+      username = Faker::Internet.username
       username = "#{username}_#{n}"
       user = User.new(
         first_name: "#{Faker::Name.first_name}",

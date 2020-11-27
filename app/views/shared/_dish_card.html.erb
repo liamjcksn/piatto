@@ -3,7 +3,7 @@
   <div class="card-body">
     <div class="card-body-left">
       <h5><%= dish.name %></h5>
-      <h5><em><%= dish.restaurant.name %></em></h5>
+      <h5><em><%= link_to dish.restaurant.name, restaurant_path(dish.restaurant.id) %></em></h5>
       <h5>£<%= dish.price %></h5>
       <p><%= dish.description %></p>
     </div>
