@@ -2,7 +2,7 @@
 
 <% @dishlist_dishes.each do |dishlist_dish| %>
   <div class="dish-card" style="margin: 0 auto">
-    <div class="dish-img" style="background-image: url(<%= image_path('pasta.jpeg') %>);"></div>
+    <div class="dish-img" style="background-image: url(<%= image_path('pasta_basil.jpg') %>);"></div>
     <div class="card-body">
       <div class="card-body-left">
         <h3><%= link_to dishlist_dish.dish.name, dish_path(dishlist_dish.dish.id) %></h3>
