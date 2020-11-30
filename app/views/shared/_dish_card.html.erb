@@ -4,9 +4,9 @@
     <div class="card-body-left">
       <h5><%= link_to dish.name, dish_path(dish) %></h5>
       <h5><em><%= link_to dish.restaurant.name, restaurant_path(dish.restaurant.id) %></em></h5>
-      <h5>£6.99</h5>
+      <h5><%= "£#{sprintf('%.2f', (dish.price / 100.to_f).round(2))}" %></h5>
       <p><%= dish.description.truncate(50) %></p>
-      <p><%= dish.average_rating %></p>
+      <p>Average rating: <%= dish.average_rating %></p>
     </div>
     <div class="card-body-right">
       <%= simple_form_for DishlistDish.new do |f| %>
