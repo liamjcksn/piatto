@@ -1,17 +1,17 @@
-<nav class="navbar justify-flex-start footer" style="position: absolute; bottom: 0; right: 0;">
-  <div class="links d-flex">
-    <a class="nav-link" href="#">Contact us</a>
-    <a class="nav-link" href="#">Terms</a>
-    <a class="nav-link" href="#">Privacy</a>
-  </div>
+<nav class="footer" style="position: absolute; bottom: 0; right: 0;">
   <div class="socials d-flex">
     <a href="#"><i class="fab fa-facebook-square m-2 social"></i></a>
     <a href="#"><i class="fab fa-instagram-square m-2 social"></i></a>
     <a href="#"><i class="fab fa-twitter-square m-2 social"></i></a>
   </div>
+  <div class="links d-flex">
+    <a class="nav-link" href="#">Contact us</a>
+    <a class="nav-link" href="#">Terms</a>
+    <a class="nav-link" href="#">Privacy</a>
+  </div>
   <div class="made-by">
     <%= link_to discover_path do %>
-    <%= image_tag "PiattoLogo", class: 'footer-piatto-logo' %>
+    <div> Made with <i class="fas fa-heart"> by Team Piatto</i> </div>
   <% end %>
   </div>
 </nav>
