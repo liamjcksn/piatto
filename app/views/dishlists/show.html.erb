@@ -11,7 +11,7 @@
       </div>
       <% if @dishlist.user == current_user %>
         <div class="card-links">
-          <%= link_to "Order Via JustEat", "#{dishlist_dish.dish.restaurant.url}/menu", target: "_blank", class: 'btn btn-warning' %>
+          <%= render 'shared/justeat_button', restaurant: dishlist_dish.dish.restaurant %>
           <%= link_to dishlist_dish_path(dishlist_dish.id),
           method: :delete,
           data: { confirm: 'Are you sure?' },

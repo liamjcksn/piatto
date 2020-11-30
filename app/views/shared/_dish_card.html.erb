@@ -7,7 +7,7 @@
       <p><%= dish.description.truncate(80) %></p>
     </div>
     <div class="card-links">
-      <%= link_to "Order Via JustEat", "#{dish.restaurant.url}/menu", target: "_blank", class: 'btn btn-warning' %>
+      <%= render 'shared/justeat_button', restaurant: dish.restaurant %>
 
       <%= simple_form_for(DishlistDish.new, html: { class: 'form-inline' }) do |f| %>
       <div class="form-froup">
