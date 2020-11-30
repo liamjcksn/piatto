@@ -12,7 +12,13 @@ class DishesController < ApplicationController
   def show
     index
     @dish = Dish.find(params[:id])
+    @restaurant = @dish.restaurant
     @review = Review.new
+    @marker = {
+      lat: @restaurant.latitude,
+      lng: @restaurant.longitude,
+      # infoWindow: render_to_string(partial: "info_window", locals: { flat: flat })
+    }
   end
 
   def create
