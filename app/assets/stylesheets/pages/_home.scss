@@ -16,17 +16,22 @@
 
 .search-form .form-input {
   height: 3em;
+  border-style: none;
 }
 
 .btn-orange {
   color: white;
-  padding: 4px 12px;
-  height: 3em;
-  margin-left: 12px;
-  border-radius: 4px;
+  padding: 0px 16px 16px 16px;
+  height: 48px;
+  font-size: 34px;
+  line-height: 1.3;
   font-weight: bold;
   background-color: $orange;
   border: 1px solid $orange;
+}
+
+.btn-orange:focus {
+  outline: 1px solid $orange;
 }
 
 .btn-orange:hover {
@@ -35,7 +40,7 @@
 }
 
 .form-input {
-  width: 300px;
+  width: 250px;
 }
 
 .home h1 {
