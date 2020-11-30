@@ -2,10 +2,12 @@
   <div class="card-body">
     <div class="card-body-left">
       <h5><%= link_to dish.name, dish_path(dish) %></h5>
+      <% dish.average_rating.to_i.times do %>
+        <%= image_tag "restaurant.svg", height: 20, class: "mb-2" %>
+      <% end %><%= "(#{dish.reviews_count} ratings)" %>
       <h6><em><%= link_to dish.restaurant.name, restaurant_path(dish.restaurant.id) %></em></h6>
       <h6>£6.99</h6>
       <p><%= dish.description.truncate(80) %></p>
-      <p><%= dish.average_rating %></p>
     </div>
     <div class="card-links">
       <%= render 'shared/justeat_button', restaurant: dish.restaurant %>
@@ -18,7 +20,7 @@
         <%= f.input :dish_id, as: :hidden, input_html: { value: dish.id } %>
       </div>
       <div class="form-actions">
-        <%= f.submit 'Add to Dishlist', class: 'btn btn-warning' %>
+        <%= f.submit 'Add to Dishlist', class: 'btn btn-warning text-white' %>
       </div>
       <% end %>
     </div>

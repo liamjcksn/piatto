@@ -8,6 +8,9 @@
         <h5><em><%= link_to dishlist_dish.dish.restaurant.name, restaurant_path(dishlist_dish.dish.restaurant.id) %></em></h5>
         <h5>£<%= dishlist_dish.dish.price %></h5>
         <p><%= dishlist_dish.dish.description %></p>
+        <% dishlist_dish.dish.average_rating.to_i.times do %>
+          <%= image_tag "plate.svg", height: 15 %>
+        <% end %><%= "(#{dishlist_dish.dish.reviews_count} ratings)" %>
       </div>
       <% if @dishlist.user == current_user %>
         <div class="card-links">
