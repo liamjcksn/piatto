@@ -2,7 +2,7 @@ require 'json'
 require 'net/http'
 
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home ]
+  skip_before_action :authenticate_user!, only: [:home, :postcode]
 
   def home
   end
@@ -57,7 +57,13 @@ class PagesController < ApplicationController
       postcode = URI.encode(params[:postcode])
       url = "https://uk.api.just-eat.io/restaurants/bypostcode/#{postcode}"
       json_restaurants = Net::HTTP.get(URI(url))
-      @local_restaurants = JSON.parse(json_restaurants)["Restaurants"]
+      all_restaurants = JSON.parse(json_restaurants)["Restaurants"].map do |restaurant|
+        restaurant["Id"]
+      end
+      cookies.each do |cookie, value|
+        cookies.delete(cookie) if cookie.to_s.start_with?("local_restaurants")
+      end
+      all_restaurants.each_slice(300).with_index { |arr, i| cookies["local_restaurants_#{i}".to_sym] = arr }
       redirect_to discover_path
     else
       redirect_to(root_path) and return
