@@ -40,8 +40,6 @@ class PagesController < ApplicationController
         end
         # redirect_to discover_path
       end
-
-
     else
       redirect_to discover_path
     end

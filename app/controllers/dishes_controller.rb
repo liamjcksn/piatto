@@ -58,5 +58,4 @@ class DishesController < ApplicationController
   def dish_params
     params.require(:dish).permit(:name)
   end
-
 end
