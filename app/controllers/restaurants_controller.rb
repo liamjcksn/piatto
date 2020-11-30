@@ -30,7 +30,7 @@ class RestaurantsController < ApplicationController
        url = "https://uk.api.just-eat.io/restaurants/uk/#{just_eat_id}/catalogue/items?limit=500"
        json_menu = Net::HTTP.get(URI(url))
        JSON.parse(json_menu)["items"].each do |dish|
-         Dish.create(just_eat_dish_id: dish["id"].to_i, name: dish["name"], description: dish["description"], restaurant_id: restaurant.id) if dish["name"]
+         Dish.create(just_eat_dish_id: dish["id"].to_i, name: dish["name"], description: dish["description"], restaurant_id: restaurant.id, average_rating: 0.0, reviews_count: 0) if dish["name"]
        end
       redirect_to restaurant_path(restaurant.id)
     end

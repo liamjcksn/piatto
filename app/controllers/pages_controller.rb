@@ -2,7 +2,8 @@ require 'json'
 require 'net/http'
 
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home ]
+  skip_before_action :authenticate_user!, only: [:home, :postcode]
+  skip_before_action :go_to_home, only: [:home, :postcode]
 
   def home
   end
@@ -24,8 +25,8 @@ class PagesController < ApplicationController
   def search
     if params[:query].present? && params[:query].length < 200
       @query = params[:query]
-      @people = User.search_by_username_or_name(@query)
-      @dishes = Dish.search_by_dish(@query)
+      @people = User.search_by_username_or_name(@query).sort_by { |a| a.avatar.attached? ? 0 : 1 }
+      @dishes = Dish.search_by_dish(@query).sort_by { |dish| dish.average_rating }.reverse!
 
       if /^([a-zA-Z]{0,2})([0-9][0-9]|[0-9]|[a-zA-Z][0-9][a-zA-Z]|[a-zA-Z][0-9][0-9]|[a-zA-Z][0-9])([ ]*)([0-9]{1,2})([a-zA-z][a-zA-z])$/.match?(params[:postcode])
         postcode = URI.encode(params[:postcode])
@@ -41,12 +42,6 @@ class PagesController < ApplicationController
       end
 
 
-
-
-
-
-
-
     else
       redirect_to discover_path
     end
@@ -57,7 +52,13 @@ class PagesController < ApplicationController
       postcode = URI.encode(params[:postcode])
       url = "https://uk.api.just-eat.io/restaurants/bypostcode/#{postcode}"
       json_restaurants = Net::HTTP.get(URI(url))
-      @local_restaurants = JSON.parse(json_restaurants)["Restaurants"]
+      all_restaurants = JSON.parse(json_restaurants)["Restaurants"].map do |restaurant|
+        restaurant["Id"]
+      end
+      cookies.each do |cookie, value|
+        cookies.delete(cookie) if cookie.to_s.start_with?("local_restaurants")
+      end
+      all_restaurants.each_slice(300).with_index { |arr, i| cookies["local_restaurants_#{i}".to_sym] = arr }
       redirect_to discover_path
     else
       redirect_to(root_path) and return

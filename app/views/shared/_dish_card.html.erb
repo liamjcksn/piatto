@@ -1,17 +1,25 @@
 <div class="dish-card" style="margin: 0 auto">
-  <div class="dish-img" style="background-image: url(<%= image_path('pasta.jpeg') %>);"></div>
   <div class="card-body">
     <div class="card-body-left">
       <h5><%= link_to dish.name, dish_path(dish) %></h5>
-      <h5><em><%= link_to dish.restaurant.name, restaurant_path(dish.restaurant.id) %></em></h5>
-      <h5>£6.99</h5>
-      <p><%= dish.description.truncate(50) %></p>
+      <h6><em><%= link_to dish.restaurant.name, restaurant_path(dish.restaurant.id) %></em></h6>
+      <h6>£6.99</h6>
+      <p><%= dish.description.truncate(80) %></p>
+      <p><%= dish.average_rating %></p>
     </div>
-    <div class="card-body-right">
-      <%= simple_form_for DishlistDish.new do |f| %>
-      <%= f.association :dishlist, collection: current_user.dishlists, label: false %>
-      <%= f.input :dish_id, as: :hidden, input_html: { value: dish.id } %>
-      <%= f.submit 'Add to Dishlist' %>
+    <div class="card-links">
+      <%= render 'shared/justeat_button', restaurant: dish.restaurant %>
+
+      <%= simple_form_for(DishlistDish.new, html: { class: 'form-inline' }) do |f| %>
+      <div class="form-froup">
+        <%= f.association :dishlist, collection: current_user.dishlists, label: false, input_html: { class: 'form-control' } %>
+      </div>
+      <div class="form-group">
+        <%= f.input :dish_id, as: :hidden, input_html: { value: dish.id } %>
+      </div>
+      <div class="form-actions">
+        <%= f.submit 'Add to Dishlist', class: 'btn btn-warning' %>
+      </div>
       <% end %>
     </div>
   </div>
