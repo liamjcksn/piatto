@@ -3,6 +3,7 @@
     <div class="bg-text">
       <h1><%= @restaurant.name %></h1>
       <p><%= @restaurant.postcode %></p>
+      <%= link_to "Order Via JustEat", "#{@restaurant.url}/menu", target: "_blank", class: 'btn btn-warning' %>
   </div>
   <div class="restaurant-dishes">
     <% @dish.each do |dish| %>
