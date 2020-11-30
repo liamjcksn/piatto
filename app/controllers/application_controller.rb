@@ -1,6 +1,15 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :go_to_home
+
+  def go_to_home
+    has_restaurants = false
+    cookies.each do |cookie, _|
+      has_restaurants = true if cookie.to_s.start_with?("local_restaurants")
+    end
+    redirect_to root_path unless has_restaurants
+  end
 
   def after_sign_in_path_for(resource)
     discover_path

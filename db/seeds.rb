@@ -48,7 +48,9 @@
         name: "#{Faker::Food.dish}",
         description: "#{Faker::Lorem.sentences(number: rand(3..5)).join("")}",
         restaurant_id: rand(1..10),
-        price: rand(1..20)
+        price: rand(1..20),
+        average_rating: 0,
+        reviews_count: 0
       )
       dish.save!
     end

@@ -6,6 +6,10 @@ class ReviewsController < ApplicationController
     @review.dish = @dish
     @review.user = current_user
     if @review.save!
+      @dish.average_rating = (@dish.average_rating * @dish.reviews_count + @review.rating) / (@dish.reviews_count + 1)
+      @dish.reviews_count += 1
+      @dish.save
+      puts "review made. average rating: #{@dish.average_rating}"
       redirect_to dish_path(@dish.id, anchor: "review-#{@review.id}")
     else
       render :new
@@ -14,6 +18,8 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review = Review.find(params[:id])
+    @dish.average_rating = (@dish.average_rating * @dish.reviews_count - @review.rating) / (@dish.reviews_count - 1)
+    @dish.reviews_count -= 1
     @review.delete
     redirect_to dish_path(@review.dish.id)
   end

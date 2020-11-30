@@ -6,6 +6,7 @@
       <h5><em><%= link_to dish.restaurant.name, restaurant_path(dish.restaurant.id) %></em></h5>
       <h5>£6.99</h5>
       <p><%= dish.description.truncate(50) %></p>
+      <p><%= dish.average_rating %></p>
     </div>
     <div class="card-body-right">
       <%= simple_form_for DishlistDish.new do |f| %>
