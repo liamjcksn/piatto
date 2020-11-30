@@ -38,16 +38,7 @@ class PagesController < ApplicationController
           restaurant[:name] =~ /#{params[:restaurant]}/i
         end
         # redirect_to discover_path
-        raise
       end
-
-
-
-
-
-
-
-
     else
       redirect_to discover_path
     end
