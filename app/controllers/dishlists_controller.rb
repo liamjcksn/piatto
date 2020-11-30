@@ -43,6 +43,6 @@ class DishlistsController < ApplicationController
   end
 
   def dishlist_params
-    params.require(:dishlist).permit(:name)
+    params.require(:dishlist).permit(:name, :photo)
   end
 end
