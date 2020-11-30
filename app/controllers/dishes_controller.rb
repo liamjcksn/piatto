@@ -19,6 +19,8 @@ class DishesController < ApplicationController
   def create
     @dish = Dish.new(params[:dish])
     @restaurant = Restaurant.new(params[:restaurant_id])
+    @dish.average_rating = 0
+    @dish.reviews_count = 0
     @dish.restaurant = @restaurant
     if @dish.save
       flash[:success] = "Dish successfully created"
@@ -51,5 +53,5 @@ class DishesController < ApplicationController
   def dish_params
     params.require(:dish).permit(:name)
   end
-  
+
 end
