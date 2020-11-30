@@ -13,7 +13,6 @@ class DishesController < ApplicationController
     index
     @dish = Dish.find(params[:id])
     @review = Review.new
-    # @dish_show = Dish.where ('restaurant.just_eat_id IN (?)', cookies[:local_restaurants_0])
   end
 
   def create
@@ -53,5 +52,4 @@ class DishesController < ApplicationController
   def dish_params
     params.require(:dish).permit(:name)
   end
-
 end

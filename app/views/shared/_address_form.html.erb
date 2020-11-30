@@ -1,6 +1,6 @@
 <%= form_tag("/postcode", method: "post") do %>
   <div class="search-form">
     <%= text_field_tag(:postcode, nil, placeholder: 'Enter your full postcode', class:"form-input", style: "text-indent: 15px;", pattern: '^([a-zA-Z]{0,2})([0-9][0-9]|[0-9]|[a-zA-Z][0-9][a-zA-Z]|[a-zA-Z][0-9][0-9]|[a-zA-Z][0-9])([ ]*)([0-9]{1,2})([a-zA-z][a-zA-z])$') %>
-    <%= submit_tag("Search", class:"btn") %>
+    <%= submit_tag("Search", class: "btn btn-orange") %>
   </div>
 <% end %>
