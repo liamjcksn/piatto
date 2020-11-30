@@ -2,7 +2,6 @@
 
 <% @dishlist_dishes.each do |dishlist_dish| %>
   <div class="dish-card" style="margin: 0 auto">
-    <div class="dish-img" style="background-image: url(<%= image_path('pasta_basil.jpg') %>);"></div>
     <div class="card-body">
       <div class="card-body-left">
         <h3><%= link_to dishlist_dish.dish.name, dish_path(dishlist_dish.dish.id) %></h3>
@@ -11,8 +10,14 @@
         <p><%= dishlist_dish.dish.description %></p>
       </div>
       <% if @dishlist.user == current_user %>
-        <div class="card-body-right">
-          <%= link_to 'Delete Dish', dishlist_dish_path(dishlist_dish.id), method: :delete, data: { confirm: 'Are you sure?' }, remote: true  %>
+        <div class="card-links">
+          <%= render 'shared/justeat_button', restaurant: dishlist_dish.dish.restaurant %>
+          <%= link_to dishlist_dish_path(dishlist_dish.id),
+          method: :delete,
+          data: { confirm: 'Are you sure?' },
+          remote: true do %>
+          <i class="far fa-trash-alt" style="font-size: 20px;"></i>
+          <% end %>
         </div>
       <% else %>
         <div class="card-body-right">
@@ -23,6 +28,6 @@
           <% end %>
         </div>
       <% end %>
+    </div>
   </div>
-</div>
 <% end %>
