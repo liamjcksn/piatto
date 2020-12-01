@@ -23,7 +23,7 @@
             <% review.photos.each_with_index do |photo, index| %>
               <% unless index == 0 %>
                 <div class="carousel-item">
-                  <%= cl_image_tag photo.key, height: 600, style:"object-fit:cover;", class: 'd-block w-100' %>
+                  <%= cl_image_tag photo.key, style:"object-fit:cover;", class: 'd-block w-100' %>
                 </div>
               <% end %>
             <% end %>
