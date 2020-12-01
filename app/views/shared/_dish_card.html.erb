@@ -1,24 +1,30 @@
-<div class="dish-card" style="margin: 0 auto">
+<% valid_card = local_restaurants_array.include?(dish.restaurant.just_eat_id) && controller_name != 'restaurants' %>
+<div class="dish-card" style="background-color:<%= valid_card ? "#ffffff;" : "#efefef;" %>">
   <div class="card-body">
     <div class="card-body-left">
-      <h5><%= link_to dish.name, dish_path(dish) %></h5>
-      <h5><em><%= link_to dish.restaurant.name, restaurant_path(dish.restaurant.id) %></em></h5>
+      <small><%= link_to dish.restaurant.name.upcase, restaurant_path(dish.restaurant.id), style: "color: #{valid_card ? '$pink' : '#B85253'}; font-size: 10px; padding: 0px;" %></small>
+      <h5><%= link_to dish.name, dish_path(dish), style: "color: #{valid_card ? '$pink' : '#B85253'}; font-size: 32px; margin: 0px; padding: 0px;" %></h5>
       <h5><%= "£#{sprintf('%.2f', (dish.price / 100.to_f).round(2))}" %></h5>
-      <p><%= dish.description.truncate(80) %></p>
-      <p>Average rating: <%= dish.average_rating %></p>
+      <p style="font-size: 14px;"><%= dish.description.truncate(200) %></p>
     </div>
     <div class="card-links">
-      <%= render 'shared/justeat_button', restaurant: dish.restaurant %>
+      <% if valid_card %>
+        <%= render 'shared/justeat_button', restaurant: dish.restaurant %>
+      <% else %>
+        <small>NOT AVAILABLE NEARBY</small>
+      <% end %>
 
-      <%= simple_form_for(DishlistDish.new, html: { class: 'form-inline' }) do |f| %>
-      <div class="form-froup">
-        <%= f.association :dishlist, collection: current_user.dishlists, label: false, input_html: { class: 'form-control' } %>
-      </div>
-      <div class="form-group">
-        <%= f.input :dish_id, as: :hidden, input_html: { value: dish.id } %>
-      </div>
-      <div class="form-actions">
-        <%= f.submit 'Add to Dishlist', class: 'btn btn-warning' %>
+      <div class="right-side">
+        <%= simple_form_for(DishlistDish.new, html: { class: 'form-inline' }) do |f| %>
+        <div class="form-froup">
+          <%= f.association :dishlist, collection: current_user.dishlists, label: false, input_html: { class: 'form-control' } %>
+        </div>
+        <div class="form-group">
+          <%= f.input :dish_id, as: :hidden, input_html: { value: dish.id } %>
+        </div>
+        <div class="form-actions">
+          <%= f.submit 'Add to Dishlist', class: 'btn btn-warning' %>
+        </div>
       </div>
       <% end %>
     </div>
