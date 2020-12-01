@@ -19,6 +19,8 @@ class DishesController < ApplicationController
       lng: @restaurant.longitude,
       # infoWindow: render_to_string(partial: "info_window", locals: { flat: flat })
     }
+    # @cookies = cookies[:local_restaurants_0].split('&')
+    # Dish.where('restaurant_id.just_eat_id IN (?)', @cookies)
   end
 
   def create

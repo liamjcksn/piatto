@@ -19,6 +19,10 @@
   border-style: none;
 }
 
+.form-input:focus {
+  outline: 1px solid #fff;
+}
+
 .btn-orange {
   color: white;
   padding: 0px 16px 16px 16px;
