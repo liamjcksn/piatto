@@ -19,6 +19,13 @@ class DishesController < ApplicationController
       lng: @restaurant.longitude,
       # infoWindow: render_to_string(partial: "info_window", locals: { flat: flat })
     }
+    @local_restaurant_ids = cookies[:local_restaurants_0].split("&").map {|string| string.to_i}
+    @local_restaurant_ids = @local_restaurant_ids + cookies[:local_restaurants_1].split("&").map {|string| string.to_i}
+    @dish_available = @local_restaurant_ids.include?(@dish.restaurant.just_eat_id)
+    unless @dish_available
+      @dishes = Dish.search_by_dish(@dish.name).sort_by { |dish| dish.average_rating }.reverse!
+      @dishes = @dishes.select { |dish| @local_restaurant_ids.include?(dish.restaurant.just_eat_id) }
+    end
   end
 
   def create
