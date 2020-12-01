@@ -80,6 +80,6 @@ class RestaurantsController < ApplicationController
       end
     end
 
-    return menu_items.reject { |menu_item| menu_item[:price].nil? || menu_item[:price].zero? }
+    return menu_items.reject { |menu_item| menu_item[:price].nil? || menu_item[:price].zero? }.uniq
   end
 end

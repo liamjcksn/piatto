@@ -34,6 +34,7 @@ gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'pg_search', '~> 2.3.0'
+gem 'pagy', '~> 3.5'
 
 gem 'pundit'
 gem 'activestorage'

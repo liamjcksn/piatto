@@ -1,4 +1,24 @@
 <div class="container" style= "margin: 0 auto">
+
+
+<%# #search in cookies for just_eat_id of current restaurant %>
+
+<% if @dish_available %>
+  <%= render partial: '/shared/justeat_button', locals: { restaurant: @dish.restaurant } %>
+<% elsif @dishes.empty?%>
+  <h5>Sorry, no results in your area</h5>
+<% else %>
+  <%= @dishes.each do |dish|  %>
+  <%= dish.name %>
+  <% end  %>
+<% end %>
+
+  <%#= render 'shared/justeat_button'  %> 
+<%# #if true, then display just eat order button
+#else, show dishes with similar name that are available to deliver to our location %>
+
+
+
   <div class="bg-image"></div>
     <div id="map"
      style="width: 100%; height: 600px;"
@@ -26,3 +46,5 @@
   <br>
   <br>
 </div>
+
+
