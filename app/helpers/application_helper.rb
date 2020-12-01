@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def avatar_tag(params = nil)
     params[:width] = 50 unless params[:width]
     params[:height] = 50 unless params[:height]
