@@ -3,7 +3,9 @@
     <div class="bg-text">
       <h1><%= @restaurant.name %></h1>
       <p><%= @restaurant.postcode %></p>
-      <%= render 'shared/justeat_button', restaurant: @restaurant %>
+      <% if local_restaurants_array.include?(@restaurant.just_eat_id) %>
+        <%= render 'shared/justeat_button', restaurant: @restaurant %>
+      <% end %>
   </div>
   <div class="restaurant-dishes">
     <% @dish.each do |dish| %>
