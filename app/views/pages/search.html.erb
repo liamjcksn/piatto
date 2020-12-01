@@ -11,7 +11,7 @@
 <% end %>
 <div class="row">
   <div class="col-8">
-    <h2>Dishes</h2>
+    <h2 style="margin-bottom: 30px;">Dishes</h2>
     <% if @dishes.length > 0 %>
       <div data-controller="infinite-scroll" data-action="scroll@window->infinite-scroll#scroll">
         <div data-target="infinite-scroll.entries">
