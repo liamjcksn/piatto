@@ -2,32 +2,48 @@
   <div id="form-width">
     <%= simple_form_for [@dish, @review], remote: true do |f| %>
       <%= f.input :rating, collection: 1..5 %>
+      <label class="btn btn-warning mx-2 text-white">
+        Add Some Photos!
+        <span style="display:none;">
+          <%= f.input :photos, required: true, input_html: { multiple: true }, name: 'photo' %>
+        </span>
+      </label>
       <%= f.input :content %>
       <div class="btn-width mx-auto">
-        <%= f.submit class: "create-btn button-center" %>
+        <%= f.submit class: "btn btn-warning text-white" %>
       </div>
     <% end %>
+  </div>
+
   <div class="list-group list-reviews">
     <% @dish.reviews.each do |review| %>
       <p id="review-<%= review.id %>"></p>
         <li class="list-group-item reviews mb-2">
-          <%= review.user.first_name || review.user.email %>
+          <p>
+            <%= review.user.first_name || review.user.email %>
             <% if review.user == current_user %>
               <%= link_to review_path(review),
                 method: :delete,
-                data: { confirm: "Are you sure?" } do %>
-                <i class="fas fa-trash-alt"></i>
+                data: { confirm: "Are you sure?" }, remote: true do %>
+                <i class="fas fa-trash-alt ml-2"></i>
               <% end %>
             <% end %>
-            <small>
-              <% review.rating.times do %>
-                <i class="fas fa-star"></i>
-              <% end %>
+          </p>
 
-            </small>
-            <p><%= review.content %></p>
+          <p>
+            <% review.rating.times do %>
+              <%= image_tag "restaurant.svg", height: 20 %>
+            <% end %>
+          </p>
+
+          <p><%= review.content %></p>
+          <% if review.photos.attached? %>
+          <div class="review_images d-flex w-100" style="overflow: scroll;">
+            <%= render 'modal', review: review %>
+          </div>
+
+          <% end %>
         </li>
     <% end %>
-  </div>
   </div>
 </div>

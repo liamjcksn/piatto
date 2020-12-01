@@ -1,3 +1,4 @@
+<div class="shadow"> <%= cl_image_tag @dishlist.photo.key, class: 'banner' %> </div>
 <h1><%= @dishlist.name %></h1>
 
 <% @dishlist_dishes.each do |dishlist_dish| %>
@@ -9,7 +10,7 @@
         <h5>£<%= dishlist_dish.dish.price %></h5>
         <p><%= dishlist_dish.dish.description %></p>
         <% dishlist_dish.dish.average_rating.to_i.times do %>
-          <%= image_tag "plate.svg", height: 15 %>
+          <%= image_tag "restaurant.svg", height: 20 %>
         <% end %><%= "(#{dishlist_dish.dish.reviews_count} ratings)" %>
       </div>
       <% if @dishlist.user == current_user %>
@@ -19,7 +20,7 @@
           method: :delete,
           data: { confirm: 'Are you sure?' },
           remote: true do %>
-          <i class="far fa-trash-alt" style="font-size: 20px;"></i>
+          Remove from dishlist <i class="far fa-trash-alt" style="font-size: 20px;"></i>
           <% end %>
         </div>
       <% else %>
@@ -27,7 +28,7 @@
           <%= simple_form_for DishlistDish.new do |f| %>
           <%= f.association :dishlist, collection: current_user.dishlists, label: false %>
           <%= f.input :dish_id, as: :hidden, input_html: { value: dishlist_dish.dish.id } %>
-          <%= f.submit %>
+          <%= f.submit class: 'btn btn-warning' %>
           <% end %>
         </div>
       <% end %>
