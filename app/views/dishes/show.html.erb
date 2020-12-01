@@ -1,12 +1,7 @@
 <div class="container" style= "margin: 0 auto">
 
 <% if @dish_available %>
-  <div class="container"></div>
-    <div id="map"
-     style="width: 100%; height: 400px;"
-     data-marker="<%= @marker.to_json %>"
-     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-     </div>
+  <%= render 'shared/map' %>
     <div class="dish-card mt-3" style="margin: 0 auto">
       <div class="card-body">
         <div class="card-body-left">
@@ -28,9 +23,30 @@
 <% elsif @dishes.empty?%>
   <h5>Sorry, no results in your area</h5>
 <% else %>
+  <h3> Sorry, <%= @dish.name %> from <%= @dish.restaurant.name %> is too far. </h3>
+  <br>
+  <h3>But don't worry, we've got you covered!</h3>
+  <%= render 'shared/map' %>
   <% @dishes.each do |dish| %>
-  <%= dish.name %>
-  <%= dish.restaurant.name %>
+      <div class="dish-card mt-3" style="margin: 0 auto">
+      <div class="card-body">
+        <div class="card-body-left">
+          <h3><%= dish.name %></h3>
+          <h5><em><%= link_to dish.restaurant.name, restaurant_path(dish.restaurant.id) %></em></h5>
+          <h5>£<%= dish.price %></h5>
+          <p><%= dish.description %></p>
+        </div>
+        <div class="card-body-right">
+          <%= simple_form_for DishlistDish.new do |f| %>
+          <%= f.association :dishlist, collection: current_user.dishlists, label: false %>
+          <%= f.input :dish_id, as: :hidden, input_html: { value: @dish.id } %>
+          <%= f.submit 'Add to dishlist' %>
+          <%= render partial: '/shared/justeat_button', locals: { restaurant: @dish.restaurant } %>
+          <% end %>
+        </div>
+      </div>
+  <%= render 'review' %>
+    </div>
   <% end  %>
 <% end %>
   </div>
