@@ -54,6 +54,7 @@ class PagesController < ApplicationController
   end
 
   def postcode
+    
     if /^([a-zA-Z]{0,2})([0-9][0-9]|[0-9]|[a-zA-Z][0-9][a-zA-Z]|[a-zA-Z][0-9][0-9]|[a-zA-Z][0-9])([ ]*)([0-9]{1,2})([a-zA-z][a-zA-z])$/.match?(params[:postcode])
       postcode = URI.encode(params[:postcode])
       url = "https://uk.api.just-eat.io/restaurants/bypostcode/#{postcode}"
