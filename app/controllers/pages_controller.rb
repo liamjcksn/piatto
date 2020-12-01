@@ -23,11 +23,19 @@ class PagesController < ApplicationController
   end
 
   def search
+
     if params[:query].present? && params[:query].length < 200
       @query = params[:query]
       @people = User.search_by_username_or_name(@query).sort_by { |a| a.avatar.attached? ? 0 : 1 }
       @pagy, @dishes = pagy(Dish.search_by_dish(@query).reorder(average_rating: :desc), items: 5)
 
+      # after pagy has been initialized:
+      respond_to do |format|
+        format.html
+        format.json {
+          render json: { entries: render_to_string(partial: "shared/dishes", formats: [:html]), pagination: view_context.pagy_bootstrap_nav(@pagy) }
+        }
+      end
       if /^([a-zA-Z]{0,2})([0-9][0-9]|[0-9]|[a-zA-Z][0-9][a-zA-Z]|[a-zA-Z][0-9][0-9]|[a-zA-Z][0-9])([ ]*)([0-9]{1,2})([a-zA-z][a-zA-z])$/.match?(params[:postcode])
         postcode = URI.encode(params[:postcode])
         url = "https://uk.api.just-eat.io/restaurants/bypostcode/#{postcode}"

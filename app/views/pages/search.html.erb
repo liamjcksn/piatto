@@ -13,16 +13,14 @@
   <div class="col-8">
     <h2>Dishes</h2>
     <% if @dishes.length > 0 %>
-      <div data-controller="infinite-scroll">
+      <div data-controller="infinite-scroll" data-action="scroll@window->infinite-scroll#scroll">
         <div data-target="infinite-scroll.entries">
-          <% @dishes.each do |dish| %>
-            <%= render 'shared/dish_card', dish: dish %>
-          <% end %>
+          <%= render 'shared/dishes' %>
         </div>
-        <%# Note the double equals sign "==" which marks the output as trusted and html safe: %>
-        <% #== pagy_nav(@pagy) %>
         <div data-target="infinite-scroll.pagination">
           <%== pagy_bootstrap_nav(@pagy) %>
+          <%# Note the double equals sign "==" which marks the output as trusted and html safe %>
+          <% #== pagy_nav(@pagy) # to get rid of bootstrap if needed %>
         </div>
       </div>
     <% else %>
