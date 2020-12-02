@@ -44,7 +44,6 @@ document.addEventListener('turbolinks:load', () => {
     }, (event, value) => {
       const link = document.querySelector(`.delete-link`);
         if (value === true) {
-          // link.click();
           event.target.nextElementSibling.click();
         }
     });
