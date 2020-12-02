@@ -1,4 +1,4 @@
-<h1><%= @user.first_name %> Dishlists</h1>
+<h1><%= @user.first_name.end_with?('s') ? "#{@user.first_name}' dishlists" : "#{@user.first_name}'s dishlists" %></h1>
 
 <% if current_user == @user %>
   <div class="m-3">

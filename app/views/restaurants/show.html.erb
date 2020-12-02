@@ -1,12 +1,19 @@
 <div class="restaurant-show">
-  <div class="bg-image"></div>
-    <div class="bg-text">
-      <h1><%= @restaurant.name %></h1>
-      <p><%= @restaurant.postcode %></p>
+  <div class="d-flex align-items-center justify-content-between" style="width: 80%;">
+    <div class="coll d-flex align-items-center">
+      <img src="<%= @restaurant.logourl %>" alt="" style="height: 100%; border-radius: 10px; box-shadow: 0 0 15px rgba(50,50,50,0.2);" class="mr-4">
+      <div class="name-postcode d-flex align-items-start flex-column">
+        <h1 class="mb-0"><%= @restaurant.name %></h1>
+        <small style="margin-left: 5px;"><strong><%= @restaurant.postcode %></strong></small>
+      </div>
+    </div>
       <% if local_restaurants_array.include?(@restaurant.just_eat_id) %>
         <%= render 'shared/justeat_button', restaurant: @restaurant %>
       <% end %>
   </div>
+  <br>
+  <h3>Top rated dishes:</h3>
+  <br>
   <div class="restaurant-dishes">
     <% @dish.each do |dish| %>
       <%= render "shared/dish_card", dish: dish %>

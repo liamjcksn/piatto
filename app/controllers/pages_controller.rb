@@ -9,7 +9,39 @@ class PagesController < ApplicationController
   end
 
   def discover
-    @people_you_follow = current_user.followees
+    lra = local_restaurants_array
+    @people_you_follow = current_user.followers.sample(10) # .select { |user| user.avatar.attached? }.sample(10)
+    followees_dishes = []
+    current_user.followers.each do |user|
+      user.dishlists.each do |dishlist|
+        followees_dishes << dishlist.dishes.order(average_rating: :desc).select { |dish| lra.include?(dish.restaurant.just_eat_id) }.first(3)
+      end
+    end
+    @people_you_follow_have_been_enjoying = followees_dishes.flatten.sample(10)
+    num_of_dishes = 3
+    sim_dishes = []
+    recc_similar_dishes = []
+    current_user.dishlists.each do |dishlist|
+      p 'dishlis dishes:'
+      p dishlist.dishes
+      dishlist.dishes.last(num_of_dishes).each do |dish|
+        p "doooish"
+        p dish
+        sim_dishes << dish
+      end
+    end
+    p "siiiimm"
+    p sim_dishes.sample(num_of_dishes)
+    sim_dishes.sample(num_of_dishes).each do |dish|
+      sim_dishes_for_dish = dish.get_similar_dishes(num_of_dishes, cookies)
+      sim_dishes_for_dish.each { |d|
+        p "double d"
+        p d
+        recc_similar_dishes << d } if sim_dishes_for_dish
+    end
+    p @people_you_follow
+    p @people_you_follow_have_been_enjoying
+    @recc_similar_dishes = recc_similar_dishes
     if params[:postcode].present?
       session[:postcode] = params[:postcode]
     end
@@ -27,7 +59,9 @@ class PagesController < ApplicationController
     if params[:query].present? && params[:query].length < 200
       @query = params[:query]
       @people = User.search_by_username_or_name(@query).sort_by { |a| a.avatar.attached? ? 0 : 1 }
-      @pagy, @dishes = pagy(Dish.search_by_dish(@query).reorder(average_rating: :desc), items: 5)
+      search_result = Dish.search_by_dish(@query).reorder(average_rating: :desc)
+      @number_of_dishes = search_result.count
+      @pagy, @dishes = pagy(search_result, items: 5)
 
       # after pagy has been initialized:
       respond_to do |format|
@@ -54,7 +88,7 @@ class PagesController < ApplicationController
   end
 
   def postcode
-    
+
     if /^([a-zA-Z]{0,2})([0-9][0-9]|[0-9]|[a-zA-Z][0-9][a-zA-Z]|[a-zA-Z][0-9][0-9]|[a-zA-Z][0-9])([ ]*)([0-9]{1,2})([a-zA-z][a-zA-z])$/.match?(params[:postcode])
       postcode = URI.encode(params[:postcode])
       url = "https://uk.api.just-eat.io/restaurants/bypostcode/#{postcode}"
@@ -70,5 +104,16 @@ class PagesController < ApplicationController
     else
       redirect_to(root_path) and return
     end
+  end
+
+  private
+
+  def local_restaurants_array
+    local_string = ""
+    only_ids = cookies.select do |cookie, _|
+      cookie.start_with?("local_restaurants_")
+    end
+    only_ids.each { |_, value| local_string += "#{value}&" }
+    local_string.split('&').map(&:to_i)
   end
 end
