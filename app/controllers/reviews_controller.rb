@@ -18,16 +18,17 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review = Review.find(params[:id])
+    @dish = Dish.find(@review.dish_id)
     @dish.average_rating = (@dish.average_rating * @dish.reviews_count - @review.rating) / (@dish.reviews_count - 1)
     @dish.reviews_count -= 1
     @review.delete
-    redirect_to dish_path(@review.dish.id)
+    redirect_to dish_path(@review.dish.id, anchor: "review-#{@review.id - 1}")
   end
 
   private
 
   def review_params
-    params.require(:review).permit(:content, :rating)
+    params.require(:review).permit(:content, :rating, photos: [])
   end
 
 end

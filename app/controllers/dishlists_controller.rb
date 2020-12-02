@@ -16,7 +16,7 @@ class DishlistsController < ApplicationController
     @dishlist = Dishlist.new(dishlist_params)
     @dishlist.user = current_user
     if @dishlist.save
-      flash[:success] = "Dishlist successfully created"
+      flash[:notice] = "Dishlist successfully created"
       redirect_to user_dishlists_path(params[:user_id])
     else
       flash[:error] = "Something went wrong"
@@ -43,6 +43,6 @@ class DishlistsController < ApplicationController
   end
 
   def dishlist_params
-    params.require(:dishlist).permit(:name)
+    params.require(:dishlist).permit(:name, :photo)
   end
 end

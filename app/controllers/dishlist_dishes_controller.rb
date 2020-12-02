@@ -2,7 +2,8 @@ class DishlistDishesController < ApplicationController
   def create
     @dishlist_dish = DishlistDish.create(strong_params)
     if @dishlist_dish.save!
-      # redirect_to user_dishlist_path(current_user, @dishlist_dish.dishlist)
+      flash[:notice] = "Dish saved to dishlist!"
+      redirect_back(fallback_location: root_path)
     else
       redirect_back(fallback_location: root_path)
     end
@@ -11,7 +12,7 @@ class DishlistDishesController < ApplicationController
   def destroy
     @dishlist_dish = DishlistDish.find(params[:id])
     @dishlist_dish.destroy
-    redirect_to user_dishlists_path(current_user)
+    redirect_back(fallback_location: root_path)
   end
 
   private

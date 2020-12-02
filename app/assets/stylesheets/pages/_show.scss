@@ -1,0 +1,22 @@
+.show-top-container {    
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.show-content-right{
+    align-items: center;
+    // width: 50%;
+    // box-sizing: border-box;
+}
+
+.show-content-left{
+    // width: 50%;
+}
+
+.mapboxgl-canvas {
+    height: 100vh;
+    width: 300px;
+}
