@@ -19,6 +19,10 @@
   border-style: none;
 }
 
+.form-input:focus {
+  outline: 1px solid #fff;
+}
+
 .btn-orange {
   color: white;
   padding: 0px 16px 16px 16px;
@@ -55,3 +59,12 @@
   font-size: 20px;
   opacity: 0.7;
 }
+
+// @media screen and (max-width: 480px) {
+//  .home {
+//    padding: 20px;
+//    h1 {
+//     font-size: 32px;
+//    }
+//  } 
+// }
