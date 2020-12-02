@@ -24,6 +24,7 @@ require("channels")
 
 // External imports
 import "bootstrap";
+import "controllers";
 import { initMapbox } from "../plugins/init_mapbox";
 import { initSweetalert } from '../plugins/init_sweetalert';
 
@@ -48,4 +49,6 @@ document.addEventListener('turbolinks:load', () => {
         }
     });
 });
+
+
 

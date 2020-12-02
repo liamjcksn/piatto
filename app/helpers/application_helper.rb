@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def avatar_tag(params = nil)
     params[:width] = 50 unless params[:width]
     params[:height] = 50 unless params[:height]
@@ -14,5 +16,14 @@ module ApplicationHelper
     else
       image_tag("default-user-image.png", params)
     end
+  end
+
+  def local_restaurants_array
+    local_string = ""
+    only_ids = cookies.select do |cookie, _|
+      cookie.start_with?("local_restaurants_")
+    end
+    only_ids.each { |_, value| local_string += "#{value}&" }
+    local_string.split('&').map(&:to_i)
   end
 end
