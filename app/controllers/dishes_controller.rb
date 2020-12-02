@@ -1,5 +1,5 @@
 class DishesController < ApplicationController
-  before_action :set_user, only: [:index, :create]
+  before_action :set_user, only: %i[index create]
 
   def index
     @dishes = Dish.all
@@ -15,13 +15,13 @@ class DishesController < ApplicationController
     @restaurant = @dish.restaurant
     @review = Review.new
     # infoWindow: render_to_string(partial: "info_window", locals: { flat: flat })
-    @local_restaurant_ids = cookies[:local_restaurants_0].split("&").map {|string| string.to_i}
-    @local_restaurant_ids += cookies[:local_restaurants_1]&.split("&")&.map {|string| string.to_i} || []
-    @local_restaurant_ids += cookies[:local_restaurants_2]&.split("&")&.map {|string| string.to_i} || []
+    @local_restaurant_ids = cookies[:local_restaurants_0].split("&").map { |string| string.to_i }
+    @local_restaurant_ids += cookies[:local_restaurants_1]&.split("&")&.map { |string| string.to_i } || []
+    @local_restaurant_ids += cookies[:local_restaurants_2]&.split("&")&.map { |string| string.to_i } || []
     @dish_available = @local_restaurant_ids.include?(@dish.restaurant.just_eat_id)
-    if !@dish_available
+    unless @dish_available
       @dishes = Dish.search_by_dish(@dish.name).sort_by { |dish| dish.average_rating }.reverse!
-      @dishes = @dishes.select { |dish| @local_restaurant_ids.include?(dish.restaurant.just_eat_id) }      
+      @dishes = @dishes.select { |dish| @local_restaurant_ids.include?(dish.restaurant.just_eat_id) }
       @restaurants = @dishes.map { |dish| dish.restaurant if dish.restaurant.geocoded? }
       @markers = @restaurants.map do |restaurant|
         {
