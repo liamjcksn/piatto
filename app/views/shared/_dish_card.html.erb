@@ -2,8 +2,12 @@
 <div class="dish-card" style="background-color:<%= valid_card ? "#ffffff;" : "#efefef;" %>">
   <div class="card-body">
     <div class="card-body-left">
+      <p><%= dish.description.truncate(80) %></p>
       <small><%= link_to dish.restaurant.name.upcase, restaurant_path(dish.restaurant.id), style: "color: #{valid_card ? '$pink' : '#B85253'}; font-size: 10px; padding: 0px;" %></small>
       <h5><%= link_to dish.name, dish_path(dish), style: "color: #{valid_card ? '$pink' : '#B85253'}; font-size: 32px; margin: 0px; padding: 0px;" %></h5>
+      <% dish.average_rating.to_i.times do %>
+        <%= image_tag "restaurant.svg", height: 20, class: "mb-2" %>
+      <% end %><%= "(#{dish.reviews_count} ratings)" %>
       <h5><%= "£#{sprintf('%.2f', (dish.price / 100.to_f).round(2))}" %></h5>
       <p style="font-size: 14px;"><%= dish.description.truncate(200) %></p>
     </div>
@@ -14,17 +18,15 @@
         <small>NOT AVAILABLE NEARBY</small>
       <% end %>
 
-      <div class="right-side">
-        <%= simple_form_for(DishlistDish.new, html: { class: 'form-inline' }) do |f| %>
-        <div class="form-froup">
-          <%= f.association :dishlist, collection: current_user.dishlists, label: false, input_html: { class: 'form-control' } %>
-        </div>
-        <div class="form-group">
-          <%= f.input :dish_id, as: :hidden, input_html: { value: dish.id } %>
-        </div>
-        <div class="form-actions">
-          <%= f.submit 'Add to Dishlist', class: 'btn btn-warning' %>
-        </div>
+      <%= simple_form_for(DishlistDish.new, html: { class: 'form-inline' }) do |f| %>
+      <div class="form-froup">
+        <%= f.association :dishlist, collection: current_user.dishlists, label: false, input_html: { class: 'form-control' } %>
+      </div>
+      <div class="form-group">
+        <%= f.input :dish_id, as: :hidden, input_html: { value: dish.id } %>
+      </div>
+      <div class="form-actions">
+        <%= f.submit 'Add to Dishlist', class: 'btn btn-warning text-white' %>
       </div>
       <% end %>
     </div>

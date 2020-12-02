@@ -3,7 +3,7 @@ class FollowingsController < ApplicationController
     @user = User.find(params[:id])
     @user.followees << current_user
     @user.save
-    flash[:notice] = "followed"
+    flash[:notice] = "You are now following #{@user.first_name} #{@user.last_name}"
     redirect_back(fallback_location: root_path)
     # current_user.followees << @user
     # current_user.save!
@@ -13,10 +13,10 @@ class FollowingsController < ApplicationController
     @user = User.find(params[:id])
     @user.followed_users.find_by(followee_id: current_user).destroy
     @user.save
-    flash[:notice] = "unfollowed"
+    flash[:notice] = "You have unfollowed #{@user.first_name} #{@user.last_name}"
     redirect_back(fallback_location: root_path)
   end
-  
+
   # def follow
   # @user = User.find(params[:id])
   # current_user.followees << @user
