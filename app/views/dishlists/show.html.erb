@@ -4,32 +4,40 @@
 <h1><%= @dishlist.name %></h1>
 
 <% @dishlist_dishes.each do |dishlist_dish| %>
-  <div class="dish-card" style="margin: 0 auto">
+
+<% valid_card = local_restaurants_array.include?(dishlist_dish.dish.restaurant.just_eat_id) && controller_name != 'restaurants' %>
+  <div class="dish-card" style="background-color:<%= valid_card ? "#ffffff;" : "#efefef;" %>">
     <div class="card-body">
       <div class="card-body-left">
-        <h3><%= link_to dishlist_dish.dish.name, dish_path(dishlist_dish.dish.id) %></h3>
-        <h5><em><%= link_to dishlist_dish.dish.restaurant.name, restaurant_path(dishlist_dish.dish.restaurant.id) %></em></h5>
-        <h5>£<%= dishlist_dish.dish.price %></h5>
-        <p><%= dishlist_dish.dish.description %></p>
+        <small><%= link_to dishlist_dish.dish.restaurant.name.upcase, restaurant_path(dishlist_dish.dish.restaurant.id), style: "color: #{valid_card ? '$pink' : '#B85253'}; font-size: 10px; padding: 0px;" %></small>
+        <h5><%= link_to dishlist_dish.dish.name, dish_path(dishlist_dish.dish), style: "color: #{valid_card ? '$pink' : '#B85253'}; font-size: 32px; margin: 0px; padding: 0px;" %></h5>
         <% dishlist_dish.dish.average_rating.to_i.times do %>
-          <%= image_tag "restaurant.svg", height: 20 %>
+          <%= image_tag "restaurant.svg", height: 20, class: "mb-2" %>
         <% end %><%= "(#{dishlist_dish.dish.reviews_count} ratings)" %>
+        <h5><%= "£#{sprintf('%.2f', (dishlist_dish.dish.price / 100.to_f).round(2))}" %></h5>
+        <p style="font-size: 14px;"><%= dishlist_dish.dish.description.truncate(200) %></p>
       </div>
-      <% if @dishlist.user == current_user %>
-        <div class="card-links">
-          <%= render 'shared/justeat_button', restaurant: dishlist_dish.dish.restaurant %>
-          <div class="delete-item btn btn-danger">Remove from dishlist <i class="far fa-trash-alt" style="font-size: 20px;"></i></div>
-          <%= link_to "", dishlist_dish_path(dishlist_dish.id), method: :delete, class: "hidden delete-link", remote: true %>
-        </div>
-      <% else %>
-        <div class="card-body-right">
-          <%= simple_form_for DishlistDish.new do |f| %>
-          <%= f.association :dishlist, collection: current_user.dishlists, label: false %>
-          <%= f.input :dish_id, as: :hidden, input_html: { value: dishlist_dish.dish.id } %>
-          <%= f.submit class: 'btn btn-warning' %>
+      <div class="card-links">
+        <% if valid_card %>
+          <% if @dishlist.user == current_user %>
+            <div class="card-links">
+              <%= render 'shared/justeat_button', restaurant: dishlist_dish.dish.restaurant %>
+              <div class="delete-item btn btn-danger">Remove from dishlist <i class="far fa-trash-alt" style="font-size: 20px;"></i></div>
+              <%= link_to "", dishlist_dish_path(dishlist_dish.id), method: :delete, class: "hidden delete-link", remote: true %>
+            </div>
+          <% else %>
+            <div class="card-body-right">
+              <%= simple_form_for DishlistDish.new do |f| %>
+              <%= f.association :dishlist, collection: current_user.dishlists, label: false %>
+              <%= f.input :dish_id, as: :hidden, input_html: { value: dishlist_dish.dish.id } %>
+              <%= f.submit class: 'btn btn-warning' %>
+              <% end %>
+            </div>
           <% end %>
-        </div>
-      <% end %>
+        <% else %>
+          <small>NOT AVAILABLE NEARBY</small>
+        <% end %>
+      </div>
     </div>
   </div>
 <% end %>
