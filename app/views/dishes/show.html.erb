@@ -1,8 +1,5 @@
 <div class="container" style= "margin: 0 auto">
-<% if @dish_available %>
-   <div class= 'show-top-container' style = "margin: 0 auto">
-      <h3> <%= @dish.restaurant.name %> delivers to you, order now! </h3>
-  </div>
+  <% if @dish_available %>
     <div class="dish-card mt-3" style="margin: 0 auto">
       <div class="card-body">
         <div class="card-body-left">
@@ -18,21 +15,20 @@
           <%= simple_form_for(DishlistDish.new, html: { class: 'form-inline' }, remote: true) do |f| %>
           <%= f.association :dishlist, collection: current_user.dishlists, label: false %>
           <%= f.input :dish_id, as: :hidden, input_html: { value: @dish.id } %>
-
           <%= f.submit 'Add to dishlist', class: "btn btn-warning ml-2 text-white" %>
           <%= render partial: '/shared/justeat_button', locals: { restaurant: @dish.restaurant } %>
           <% end %>
         </div>
       <%= render 'review', dish: @dish %>
     </div>
-<% elsif @dishes.empty?%>
-  <h5>Sorry, no results in your area</h5>
-<% else %>
-  <div class= 'show-top-container'>
+  <% elsif @dishes.empty?%>
+    <h5>Sorry, no results in your area</h5>
+  <% else %>
+    <div class= 'show-top-container'>
       <h3> <%= @dish.restaurant.name %> doesn't deliver to you. But there similar dishes from restaurants nearby! </h3>
       <%= render 'shared/map' %>
-  </div>
-  <% @dishes.each do |dish| %>
+    </div>
+    <% @dishes.each do |dish| %>
       <div class="dish-card mt-3" style="margin: 0 auto">
         <div class="card-body">
           <div class="card-body-left">
@@ -42,47 +38,19 @@
             <p><%= @dish.description %></p>
           </div>
           <div class="card-body-right d-flex">
-          <div class="left-box">
-            <%= simple_form_for DishlistDish.new do |f| %>
-            <%= f.association :dishlist, collection: current_user.dishlists, label: false %>
-            <%= f.input :dish_id, as: :hidden, input_html: { value: @dish.id } %>
-            <%= f.submit 'Add to dishlist' %>
-            <% end %>
+            <div class="left-box">
+              <%= simple_form_for DishlistDish.new do |f| %>
+              <%= f.association :dishlist, collection: current_user.dishlists, label: false %>
+              <%= f.input :dish_id, as: :hidden, input_html: { value: @dish.id } %>
+              <%= f.submit 'Add to dishlist' %>
+              <% end %>
+            </div>
+            <div class="right-box">
+              <%= render partial: '/shared/justeat_button', locals: { restaurant: @dish.restaurant } %>
+            </div>
           </div>
-          <div class="right-box">
-            <%= render partial: '/shared/justeat_button', locals: { restaurant: @dish.restaurant } %>
-          </div>
-          </div>
-    <%= render 'review' %>
+        <%= render 'review' %>
       </div>
-  <% elsif @dishes.empty?%>
-    <h5>Sorry, no results in your area</h5>
-  <% else %>
-    <h3> Sorry, <%= @dish.name %> from <%= @dish.restaurant.name %> is too far. </h3>
-    <br>
-    <h3>But don't worry, we've got you covered!</h3>
-    <%= render 'shared/map' %>
-    <% @dishes.each do |dish| %>
-        <div class="dish-card mt-3" style="margin: 0 auto">
-        <div class="card-body">
-          <div class="card-body-left">
-            <h3><%= dish.name %></h3>
-            <h5><em><%= link_to dish.restaurant.name, restaurant_path(dish.restaurant.id) %></em></h5>
-            <h5>£<%= dish.price %></h5>
-            <p><%= dish.description %></p>
-          </div>
-          <div class="card-body-right">
-            <%= simple_form_for DishlistDish.new do |f| %>
-            <%= f.association :dishlist, collection: current_user.dishlists, label: false %>
-            <%= f.input :dish_id, as: :hidden, input_html: { value: @dish.id } %>
-            <%= f.submit 'Add to dishlist' %>
-            <%= render partial: '/shared/justeat_button', locals: { restaurant: @dish.restaurant } %>
-            <% end %>
-          </div>
-        </div>
-    <%= render 'review' %>
-      </div>
-    <% end  %>
+    <% end %>
   <% end %>
-    </div>
 </div>
