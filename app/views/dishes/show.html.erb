@@ -1,27 +1,31 @@
 <div class="container" style= "margin: 0 auto">
 
 <% if @dish_available %>
-  <div class= 'show-top-container' style = "margin: 0 auto">
+   <div class= 'show-top-container' style = "margin: 0 auto">
       <h3> <%= @dish.restaurant.name %> delivers to you, order now! </h3>
   </div>
-  <div class="dish-card mt-3" style="margin: 0 auto">
-    <div class="card-body">
-      <div class="card-body-left">
-        <h3><%= @dish.name %></h3>
-        <h5><em><%= link_to @dish.restaurant.name, restaurant_path(@dish.restaurant.id) %></em></h5>
-        <h5>£<%= @dish.price %></h5>
-        <p><%= @dish.description %></p>
-      </div>
-      <div class="card-body-right">
-        <%= simple_form_for DishlistDish.new do |f| %>
-        <%= f.association :dishlist, collection: current_user.dishlists, label: false %>
-        <%= f.input :dish_id, as: :hidden, input_html: { value: @dish.id } %>
-        <%= f.submit 'Add to dishlist' %>
-        <%= render partial: '/shared/justeat_button', locals: { restaurant: @dish.restaurant } %>
-        <% end %>
-      </div>
-  <%= render 'review' %>
-  </div>
+    <div class="dish-card mt-3" style="margin: 0 auto">
+      <div class="card-body">
+        <div class="card-body-left">
+          <h3><%= @dish.name %></h3>
+          <% @dish.average_rating.to_i.times do %>
+            <%= image_tag "restaurant.svg", height: 20, class: "mb-2" %>
+          <% end %><%= "(#{@dish.reviews.count} ratings)" %>
+          <h5><em><%= link_to @dish.restaurant.name, restaurant_path(@dish.restaurant.id) %></em></h5>
+          <h5>£<%= @dish.price %></h5>
+          <p><%= @dish.description %></p>
+        </div>
+        <div class="card-body-right">
+          <%= simple_form_for(DishlistDish.new, html: { class: 'form-inline' }, remote: true) do |f| %>
+          <%= f.association :dishlist, collection: current_user.dishlists, label: false %>
+          <%= f.input :dish_id, as: :hidden, input_html: { value: @dish.id } %>
+
+          <%= f.submit 'Add to dishlist', class: "btn btn-warning ml-2 text-white" %>
+          <%= render partial: '/shared/justeat_button', locals: { restaurant: @dish.restaurant } %>
+          <% end %>
+        </div>
+      <%= render 'review', dish: @dish %>
+    </div>
 <% elsif @dishes.empty?%>
   <h5>Sorry, no results in your area</h5>
 <% else %>
