@@ -35,7 +35,7 @@
       <%= hidden_field_tag :query, @query %>
       <%= text_field_tag :restaurant, params[:restaurant], class: "form-control search-search", placeholder: "Name of restaurant", required: true %>
       <%= text_field_tag :postcode, params[:postcode] || session[:postcode], class: "form-control search-search", placeholder: "Full postcode where you were", required: true, pattern: '^([a-zA-Z]{0,2})([0-9][0-9]|[0-9]|[a-zA-Z][0-9][a-zA-Z]|[a-zA-Z][0-9][0-9]|[a-zA-Z][0-9])([ ]*)([0-9]{1,2})([a-zA-z][a-zA-z])$' %>
-      <%= submit_tag 'Find restaurant' %>
+      <%= submit_tag 'Find restaurant', class: 'btn btn-warning mt-2' %>
     <% end %>
     <% if @restaurant_names %>
       <% @restaurant_names.each do |restaurant| %>

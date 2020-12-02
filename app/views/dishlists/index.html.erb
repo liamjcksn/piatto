@@ -4,6 +4,12 @@
   <div class="m-3">
     <%= simple_form_for([ @user, @dishlist ], remote: true, html: { class: 'form-inline' }) do |f| %>
       <%= f.input :name, placeholder: "Create a new Dishlist..." ,label: false %>
+      <label class="btn btn-warning mx-2">
+        Add a photo!
+        <span style="display:none;">
+          <%= f.input :photo, required: true, name: 'picture' %>
+        </span>
+      </label>
       <%= f.submit 'Create Dishlist', class: 'btn btn-warning' %>
     <% end %>
   </div>

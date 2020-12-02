@@ -2,8 +2,8 @@ require 'json'
 require 'net/http'
 
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home, :postcode]
-  skip_before_action :go_to_home, only: [:home, :postcode]
+  skip_before_action :authenticate_user!, only: %i[home postcode]
+  skip_before_action :go_to_home, only: %i[home postcode]
 
   def home
   end
@@ -22,25 +22,15 @@ class PagesController < ApplicationController
     sim_dishes = []
     recc_similar_dishes = []
     current_user.dishlists.each do |dishlist|
-      p 'dishlis dishes:'
-      p dishlist.dishes
       dishlist.dishes.last(num_of_dishes).each do |dish|
-        p "doooish"
-        p dish
         sim_dishes << dish
       end
     end
-    p "siiiimm"
-    p sim_dishes.sample(num_of_dishes)
     sim_dishes.sample(num_of_dishes).each do |dish|
       sim_dishes_for_dish = dish.get_similar_dishes(num_of_dishes, cookies)
       sim_dishes_for_dish.each { |d|
-        p "double d"
-        p d
         recc_similar_dishes << d } if sim_dishes_for_dish
     end
-    p @people_you_follow
-    p @people_you_follow_have_been_enjoying
     @recc_similar_dishes = recc_similar_dishes
     if params[:postcode].present?
       session[:postcode] = params[:postcode]
@@ -55,7 +45,6 @@ class PagesController < ApplicationController
   end
 
   def search
-
     if params[:query].present? && params[:query].length < 200
       @query = params[:query]
       @people = User.search_by_username_or_name(@query).sort_by { |a| a.avatar.attached? ? 0 : 1 }
@@ -66,11 +55,11 @@ class PagesController < ApplicationController
       # after pagy has been initialized:
       respond_to do |format|
         format.html
-        format.json {
+        format.json do
           render json: { entries: render_to_string(partial: "shared/dishes", formats: [:html]), pagination: view_context.pagy_bootstrap_nav(@pagy) }
-        }
+        end
       end
-      if /^([a-zA-Z]{0,2})([0-9][0-9]|[0-9]|[a-zA-Z][0-9][a-zA-Z]|[a-zA-Z][0-9][0-9]|[a-zA-Z][0-9])([ ]*)([0-9]{1,2})([a-zA-z][a-zA-z])$/.match?(params[:postcode])
+      if /^([a-zA-Z]{0,2})([0-9][0-9]|[0-9]|[a-zA-Z][0-9][a-zA-Z]|[a-zA-Z][0-9][0-9]|[a-zA-Z][0-9])( *)([0-9]{1,2})([a-zA-z][a-zA-z])$/.match?(params[:postcode])
         postcode = URI.encode(params[:postcode])
         url = "https://uk.api.just-eat.io/restaurants/bypostcode/#{postcode}"
         json_restaurants = Net::HTTP.get(URI(url))
@@ -88,15 +77,14 @@ class PagesController < ApplicationController
   end
 
   def postcode
-
-    if /^([a-zA-Z]{0,2})([0-9][0-9]|[0-9]|[a-zA-Z][0-9][a-zA-Z]|[a-zA-Z][0-9][0-9]|[a-zA-Z][0-9])([ ]*)([0-9]{1,2})([a-zA-z][a-zA-z])$/.match?(params[:postcode])
+    if /^([a-zA-Z]{0,2})([0-9][0-9]|[0-9]|[a-zA-Z][0-9][a-zA-Z]|[a-zA-Z][0-9][0-9]|[a-zA-Z][0-9])( *)([0-9]{1,2})([a-zA-z][a-zA-z])$/.match?(params[:postcode])
       postcode = URI.encode(params[:postcode])
       url = "https://uk.api.just-eat.io/restaurants/bypostcode/#{postcode}"
       json_restaurants = Net::HTTP.get(URI(url))
       all_restaurants = JSON.parse(json_restaurants)["Restaurants"].map do |restaurant|
         restaurant["Id"]
       end
-      cookies.each do |cookie, value|
+      cookies.each do |cookie, _value|
         cookies.delete(cookie) if cookie.to_s.start_with?("local_restaurants")
       end
       all_restaurants.each_slice(300).with_index { |arr, i| cookies["local_restaurants_#{i}".to_sym] = arr }

@@ -10,6 +10,8 @@
     "jquery": "^3.5.1",
     "mapbox-gl": "^1.13.0",
     "popper.js": "^1.16.1",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^10.10.4",
     "stimulus": "^1.1.1",
     "turbolinks": "^5.2.0"
   },
