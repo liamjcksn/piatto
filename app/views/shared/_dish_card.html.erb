@@ -1,19 +1,21 @@
 <% valid_card = local_restaurants_array.include?(dish.restaurant.just_eat_id) && controller_name != 'restaurants' %>
-<div class="dish-card" style="background-color:<%= valid_card ? "#ffffff;" : "#efefef;" %>">
+<% or_case = local_restaurants_array.include?(dish.restaurant.just_eat_id) && controller_name == 'restaurants' %>
+<div class="dish-card" style="background-color:<%= valid_card || or_case  ? "#ffffff;" : "#efefef;" %>">
   <div class="card-body">
     <div class="card-body-left">
-      <small><%= link_to dish.restaurant.name.upcase, restaurant_path(dish.restaurant.id), style: "color: #{valid_card ? '$pink' : '#B85253'}; font-size: 10px; padding: 0px;" %></small>
-      <h5><%= link_to dish.name, dish_path(dish), style: "color: #{valid_card ? '$pink' : '#B85253'}; font-size: 32px; margin: 0px; padding: 0px;" %></h5>
+      <small><%= link_to dish.restaurant.name.upcase, restaurant_path(dish.restaurant.id), style: "color: #{valid_card || or_case ? '$pink' : '#B85253'}; font-size: 10px; padding: 0px;" %></small>
+      <h5><%= link_to dish.name, dish_path(dish), style: "color: #{valid_card || or_case ? '$pink' : '#B85253'}; font-size: 32px; margin: 0px; padding: 0px;" %></h5>
       <% dish.average_rating.to_i.times do %>
         <%= image_tag "restaurant.svg", height: 20, class: "mb-2" %>
       <% end %><%= "(#{dish.reviews_count} ratings)" %>
       <h5><%= "£#{sprintf('%.2f', (dish.price / 100.to_f).round(2))}" %></h5>
       <p style="font-size: 14px;"><%= dish.description.truncate(200) %></p>
+<!--       <p><%= dish.tags %></p> -->
     </div>
     <div class="card-links">
       <% if valid_card %>
         <%= render 'shared/justeat_button', restaurant: dish.restaurant %>
-      <% else %>
+      <% elsif controller_name != 'restaurants' %>
         <small>NOT AVAILABLE NEARBY</small>
       <% end %>
 

@@ -1,5 +1,5 @@
 <h1 style="width: calc(100vw - 330px); height: 80px; overflow-x: hidden; overflow-y: hidden; white-space: nowrap; text-overflow: ellipsis;">Search results for <span style="opacity: 40%; font-style: italic;">&ldquo;<%= @query %>&rdquo;</span></h1>
-<h2>People</h2>
+<h3>People<%= @people.count.zero? ? '' : " (#{@people.count})" %></h3>
 <% if @people.length > 0 %>
   <div class="search-people-scroll">
     <% @people.each do |person| %>
@@ -11,8 +11,9 @@
 <% end %>
 <div class="row">
   <div class="col-8">
-    <h2 style="margin-bottom: 30px;">Dishes</h2>
+    <h3>Dishes<%= @number_of_dishes.zero? ? '' : " (#{@number_of_dishes})" %></h3>
     <% if @dishes.length > 0 %>
+      <div style="height: 30px;"></div>
       <div data-controller="infinite-scroll" data-action="scroll@window->infinite-scroll#scroll">
         <div data-target="infinite-scroll.entries">
           <%= render 'shared/dishes' %>

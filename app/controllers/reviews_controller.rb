@@ -21,6 +21,7 @@ class ReviewsController < ApplicationController
     @dish = Dish.find(@review.dish_id)
     @dish.average_rating = (@dish.average_rating * @dish.reviews_count - @review.rating) / (@dish.reviews_count - 1)
     @dish.reviews_count -= 1
+    @dish.save
     @review.delete
     redirect_to dish_path(@review.dish.id, anchor: "review-#{@review.id - 1}")
   end

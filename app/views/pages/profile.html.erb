@@ -1,11 +1,11 @@
-<h1 class="text-center mb-3"><%= @user.first_name %>'s profile</h1>
+<h1 class="mb-3"><%= @user.first_name.end_with?('s') ? "#{@user.first_name}' profile" : "#{@user.first_name}'s profile" %></h1>
 
 <div class="container" style="height: calc(100vh - 200px);">
 
   <div class="profile-information d-flex">
     <%= avatar_tag user: @user, class: "profile-img", width: 200, height: 200 %>
     <div class="info w-75">
-      <h5 class="profile-h5">User</h5>
+      <!-- <h5 class="profile-h5">User</h5> -->
       <h5><%= @user.username %></h5>
       <div class="dishlist-box">
         <h5><%= link_to "View #{@user.first_name}'s #{@dishlists.count} Dishlists", user_dishlists_path(params[:id]) %></h5>

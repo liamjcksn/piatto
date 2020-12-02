@@ -33,6 +33,15 @@
   }
 }
 
+.sb-sn {
+  font-size: 16px;
+  font-weight: 300;
+  color: black;
+  margin: 15px 0 10px 13px;
+  padding: 0;
+  text-decoration: none;
+}
+
 .sb-link:hover {
   background-color: #E0E0E0;
   text-decoration: none;
@@ -85,9 +94,12 @@
 .sb-search-field {
   margin: 0px 0px 10px 10px;
   width: 150px;
+  padding: 0;
 }
 
 .sb-search {
+  position: absolute;
+  width: 150px;
   font-size: 12px;
   font-weight: 500;
   border-radius: 8px;
@@ -105,8 +117,19 @@
 .sb-search-icon {
   position: relative;
   float: right;
-  top: 23px;
+  top: 12px;
   width: 10px;
   right: 128px;
   color: #CCC;
+  margin: 0;
+  padding: 0;
+}
+
+.hov {
+  opacity: 40%;
+  border-radius: 10px;
+}
+
+.hov:hover {
+  opacity: 70%;
 }

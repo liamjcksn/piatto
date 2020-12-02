@@ -50,7 +50,8 @@
         restaurant_id: rand(1..10),
         price: rand(100..2000),
         average_rating: 0,
-        reviews_count: 0
+        reviews_count: 0,
+        tags: "pizza=1&margherita=1"
       )
       dish.save!
     end

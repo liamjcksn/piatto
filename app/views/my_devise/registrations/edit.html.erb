@@ -1,44 +1,56 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Edit my account</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+<%= f.error_notification %>
 
-  <div class="form-inputs">
+
+<div class="form-inputs">
+  <div style="width: 440px;">
     <%= f.input :email, required: true, autofocus: true %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+    <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.input :avatar, required: false, autofocus: true, wrapper_html: { class: "d-inline-block mr-2", style: "width: 210px;" } %>
+    <%= f.input :username, required: true, autofocus: true, wrapper_html: { class: "d-inline-block" } %>
+  </div>
 
-    <%= f.input :avatar, required: false, autofocus: true %>
-    <%= f.input :username, required: true, autofocus: true %>
+  <div class="control-group">
+    <%= f.input :first_name, wrapper_html: { class: "d-inline-block" }, required: true, autofocus: true %>
+    <%= f.input :last_name, wrapper_html: { class: "d-inline-block" }, required: true, autofocus: true %>
+  </div>
 
+  <div class="pl-3 pt-1 pr-3 mb-3" style="background-color: rgba(20,20,20,0.1); border-radius: 5px; width: fit-content;">
+    <small style="font-size: 10px; margin-bottom: 10px;">LEAVE SECTION BLANK UNLESS YOU'D LIKE TO CHANGE YOUR PASSWORD</small>
     <div class="control-group">
-      <%= f.input :first_name, wrapper_html: { class: "d-inline-block" }, required: true, autofocus: true %>
-      <%= f.input :last_name, wrapper_html: { class: "d-inline-block" }, required: true, autofocus: true %>
-
+      <%= f.input :password, label: 'New password',
+      # hint: "Leave blank unless you'd like to change your password",
+      required: false, wrapper_html: { class: "d-inline-block" },
+      input_html: { autocomplete: "new-password" } %>
+      <%= f.input :password_confirmation, label: 'Confirm new password',
+      required: false, wrapper_html: { class: "d-inline-block" },
+      input_html: { autocomplete: "new-password" } %>
     </div>
-
-    <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
+</div>
+<div class="control-group" style="width: 440px;">
+  <%= f.input :current_password,
+  placeholder: "To confirm changes",
+  required: true, wrapper_html: { class: "d-inline-block mr-3" },
+  input_html: { autocomplete: "current-password" } %>
+  <div class="form-actions d-inline-block">
+    <%= f.button :submit, "Update", class: "btn btn-primary" %>
   </div>
+</div>
+</div>
 
-  <div class="form-actions btn btn-primary">
-    <%= f.button :submit, "Update" %>
-  </div>
+
 <% end %>
 
-<h3 class="mt-4">Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+<!-- <h3 class="mt-4">Cancel my account</h3> -->
+<br>
+<%= link_to "Back", :back, class: "btn btn-secondary" %>
+<br>
+<br>
+<p style="font-size: 12px;">Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure you want to delete your account? All your dishlists will be lost." }, method: :delete %></p>
