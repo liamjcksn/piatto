@@ -1,7 +1,9 @@
 <div class="container" style= "margin: 0 auto">
 
 <% if @dish_available %>
-  <%= render 'shared/map' %>
+   <div class= 'show-top-container' style = "margin: 0 auto">
+      <h3> <%= @dish.restaurant.name %> delivers to you, order now! </h3>
+  </div>
     <div class="dish-card mt-3" style="margin: 0 auto">
       <div class="card-body">
         <div class="card-body-left">
@@ -22,15 +24,15 @@
           <%= render partial: '/shared/justeat_button', locals: { restaurant: @dish.restaurant } %>
           <% end %>
         </div>
-  <%= render 'review', dish: @dish %>
+      <%= render 'review', dish: @dish %>
     </div>
 <% elsif @dishes.empty?%>
   <h5>Sorry, no results in your area</h5>
 <% else %>
-  <h3> Sorry, <%= @dish.name %> from <%= @dish.restaurant.name %> is too far. </h3>
-  <br>
-  <h3>But don't worry, we've got you covered!</h3>
-  <%= render 'shared/map' %>
+  <div class= 'show-top-container'>
+      <h3> <%= @dish.restaurant.name %> doesn't deliver to you. But there similar dishes from restaurants nearby! </h3>
+      <%= render 'shared/map' %>
+  </div>
   <% @dishes.each do |dish| %>
       <div class="dish-card mt-3" style="margin: 0 auto">
       <div class="card-body">
