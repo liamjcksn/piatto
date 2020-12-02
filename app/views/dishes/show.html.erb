@@ -9,13 +9,17 @@
             <h5>£<%= @dish.price %></h5>
             <p><%= @dish.description %></p>
           </div>
-          <div class="card-body-right">
+          <div class="card-body-right d-flex">
+          <div class="left-box">
             <%= simple_form_for DishlistDish.new do |f| %>
             <%= f.association :dishlist, collection: current_user.dishlists, label: false %>
             <%= f.input :dish_id, as: :hidden, input_html: { value: @dish.id } %>
             <%= f.submit 'Add to dishlist' %>
-            <%= render partial: '/shared/justeat_button', locals: { restaurant: @dish.restaurant } %>
             <% end %>
+          </div>
+          <div class="right-box">
+            <%= render partial: '/shared/justeat_button', locals: { restaurant: @dish.restaurant } %>
+          </div>
           </div>
     <%= render 'review' %>
       </div>
