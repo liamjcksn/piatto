@@ -1,10 +1,31 @@
-<div class="dc-card">
-  <div class="dc-img" style="background-image: url(<%= image_path('pasta_basil.jpg') %>);"></div>
-  <div class="card-body">
-    <div class="dc-content">
-      <div class = "dc-left"><%= avatar_tag class: 'rounded-circle m-3', width: 40, height: 40 %><h4><b>John Doe</b></h4></div>
-      <div class = "dc-right"><h4>Pasta & Basil</h4></div>
-      
+<div class="card discover-card">
+  <%#= link_to dish_path(dish.id) do %>
+  <%= link_to '#' do %>
+    <%# if dish.photos.attached? %>
+      <%= image_tag 'pasta.jpeg', height: 150, alt: "alttext", class: 'dc-img' %>
+    <%# end %>
+    <div class="card-body dc-body w-100">
+      <div class="middle-section">
+        <div class="restaurant-info">
+          <small><%= link_to 'Restaurant Name', '#' %><%#= link_to dish.restaurant.name.upcase, restaurant_path(dish.restaurant.id), style: "color: #{valid_card ? '$pink' : '#B85253'}; font-size: 10px; padding: 0px;" %></small>
+          <h5 class="card-title"><%= link_to 'Dish name', '#' %><%#= dish.name %></h5>
+          <div class="ratings d-flex">
+            <% 4.times do %>
+              <%= image_tag "restaurant.svg", height: 20, class: "card-subtitle mb-2 text-muted" %>
+            <% end %><%#= "(#{dish.reviews_count} ratings)" %>
+          </div>
+        </div>
+        <div class="avatar-section">
+          <%#= avatar_tag user: 'user' %>
+          <%#= user.first_name %>
+        </div>
+      </div>
     </div>
-  </div>
+    <%# if valid_card %>
+    <p class="text-center">Find on just eat</p>
+      <%#= render 'shared/justeat_button', restaurant: dish.restaurant %>
+    <%# else %>
+      <!-- <small>NOT AVAILABLE NEARBY</small> -->
+    <%# end %>
+  <% end %>
 </div>
