@@ -1,4 +1,6 @@
-<div class="shadow"> <%= cl_image_tag @dishlist.photo.key, class: 'banner' %> </div>
+<% if @dishlist.photo.attached? %>
+  <div class="shadow"> <%= cl_image_tag @dishlist.photo.key, class: 'banner' %> </div>
+<% end %>
 <h1><%= @dishlist.name %></h1>
 
 <% @dishlist_dishes.each do |dishlist_dish| %>
@@ -16,12 +18,8 @@
       <% if @dishlist.user == current_user %>
         <div class="card-links">
           <%= render 'shared/justeat_button', restaurant: dishlist_dish.dish.restaurant %>
-          <%= link_to dishlist_dish_path(dishlist_dish.id),
-          method: :delete,
-          data: { confirm: 'Are you sure?' },
-          remote: true do %>
-          Remove from dishlist <i class="far fa-trash-alt" style="font-size: 20px;"></i>
-          <% end %>
+          <div class="delete-item btn btn-danger">Remove from dishlist <i class="far fa-trash-alt" style="font-size: 20px;"></i></div>
+          <%= link_to "", dishlist_dish_path(dishlist_dish.id), method: :delete, class: "hidden delete-link", remote: true %>
         </div>
       <% else %>
         <div class="card-body-right">

@@ -17,7 +17,7 @@
           <p><%= @dish.description %></p>
         </div>
         <div class="card-body-right">
-          <%= simple_form_for(DishlistDish.new, html: { class: 'form-inline' }) do |f| %>
+          <%= simple_form_for(DishlistDish.new, html: { class: 'form-inline' }, remote: true) do |f| %>
           <%= f.association :dishlist, collection: current_user.dishlists, label: false %>
           <%= f.input :dish_id, as: :hidden, input_html: { value: @dish.id } %>
           <%= f.submit 'Add to dishlist', class: "btn btn-warning ml-2 text-white" %>

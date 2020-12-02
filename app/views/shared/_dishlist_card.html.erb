@@ -9,9 +9,11 @@
       <div class="d-flex justify-content-center">
         <%= link_to 'View Dishes', user_dishlist_path(dishlist.user_id, dishlist.id), class: "btn btn-sm btn-warning mr-2" %>
         <% if dishlist.user == current_user %>
-          <%= link_to 'Delete Dishlist', user_dishlist_path(dishlist.user_id, dishlist.id), method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "btn btn-sm btn-warning ml-2" %>
+          <div class="delete-item btn btn-sm btn-warning ml-2">Delete Dishlist</div>
+          <%= link_to "", user_dishlist_path(dishlist.user_id, dishlist.id), method: :delete, class: "hidden delete-link", remote: true %>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+

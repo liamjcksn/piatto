@@ -1,11 +1,15 @@
-import swal from 'sweetalert';
+import swal from 'sweetalert'
 
-const initSweetalert = (selector, options = {}) => {
-  const swalButton = document.querySelector(selector);
-  if (swalButton) { // protect other pages
-    swalButton.addEventListener('click', () => {
-      swal(options);
-    });
+
+const initSweetalert = (selector, options = {}, callback = () => {}) => {
+  const swalButtons = document.querySelectorAll(selector);
+  if (swalButtons) { // protect other pages
+    swalButtons.forEach((swalButton) => {
+      swalButton.addEventListener('click', (event) => {
+        swal(options).then((value) => callback(event, value)); // <-- add the `.then(callback)`
+        // console.log(swalButton)
+      });
+    })
   }
 };
 

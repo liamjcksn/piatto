@@ -22,11 +22,8 @@
           <p>
             <%= review.user.first_name || review.user.email %>
             <% if review.user == current_user %>
-              <%= link_to review_path(review),
-                method: :delete,
-                data: { confirm: "Are you sure?" }, remote: true do %>
-                <i class="fas fa-trash-alt ml-2"></i>
-              <% end %>
+              <div class="delete-item "><i class="far fa-trash-alt" style="font-size: 15px;"></i></div>
+              <%= link_to "", review_path(review), method: :delete, class: 'delete-link hidden', remote: true %>
             <% end %>
           </p>
 
