@@ -12,7 +12,7 @@
 
 <% if !@recc_similar_dishes.empty? %>
   <h2 class="mt-5 mb-3">Dishes you might enjoy</h2>
-  <div class="discover-row my-2 ml-1">
+  <div class="row discover-row my-2 ml-1">
     <% @recc_similar_dishes.each do |dish| %>
       <%= render 'shared/discover_card', dish: dish, class: 'dc-dish' %>
     <% end %>
