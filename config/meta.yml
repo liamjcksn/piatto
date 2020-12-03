@@ -1,0 +1,5 @@
+meta_product_name: "Piatto"
+meta_title: "Piatto | Great dishes near you"
+meta_description: "Piatto lets you find and discover new dishes in your area: Curate your own dishlists, share them with your friends, review dishes, and order newly found dishes via JustEat!"
+meta_image: "cover.png" # should exist in `app/assets/images/`
+twitter_account: "@piatto"   # required for Twitter Cards
