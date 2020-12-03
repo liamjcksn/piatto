@@ -9,12 +9,11 @@ class PagesController < ApplicationController
   end
 
   def discover
-    lra = local_restaurants_array
     @people_you_follow = current_user.followers.sample(10) # .select { |user| user.avatar.attached? }.sample(10)
     followees_dishes = []
     current_user.followers.each do |user|
       user.dishlists.each do |dishlist|
-        followees_dishes_without_users = dishlist.dishes.order(average_rating: :desc).select { |dish| lra.include?(dish.restaurant.just_eat_id) }.first(3)
+        followees_dishes_without_users = dishlist.dishes.order(average_rating: :desc).first(3)
         followees_dishes << followees_dishes_without_users.map { |fdwu| [fdwu, user]}
       end
     end
@@ -28,11 +27,11 @@ class PagesController < ApplicationController
       end
     end
     sim_dishes.sample(num_of_dishes).each do |dish|
-      sim_dishes_for_dish = dish.get_similar_dishes(num_of_dishes, cookies)
+      sim_dishes_for_dish = dish.get_similar_dishes(num_of_dishes)
       sim_dishes_for_dish.each { |d|
         recc_similar_dishes << d } if sim_dishes_for_dish
     end
-    @recc_similar_dishes = recc_similar_dishes
+    @recc_similar_dishes = recc_similar_dishes.uniq
     if params[:postcode].present?
       session[:postcode] = params[:postcode]
     end

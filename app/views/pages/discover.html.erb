@@ -7,7 +7,7 @@
     <% end %>
   </div>
 <% else %>
-  <p>Follow some people to see their favourite dishes!</p>
+  <p class="p-3"><em><strong>Follow</strong> some people to see their <strong>favourite</strong> dishes.</em></p>
 <% end %>
 
 <% if !@recc_similar_dishes.empty? %>
@@ -18,7 +18,7 @@
     <% end %>
   </div>
 <% else %>
-  <p>Make some dishlists to see similar dishes!</p>
+  <p class="p-3"><em>Make some <strong>dishlists</strong> to see <strong>similar dishes</strong>.</em></p>
 <% end %>
 
 <% if !@people_you_follow.empty? %>
@@ -29,6 +29,6 @@
     <% end %>
   </div>
 <% else %>
-  <p>Follow some people to see them!</p>
+  <p class="p-3"><em><strong>Follow</strong> some people to see their profiles.</em></p>
 <% end %>
 
