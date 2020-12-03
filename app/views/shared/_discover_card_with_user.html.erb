@@ -20,7 +20,7 @@
         <div class="avatar-section">
           <%= link_to profile_path(user) do %>
             <%= avatar_tag user: user, class: 'avatar-image' %>
-            <%= link_to user.first_name, profile_path(user) %>
+            <small><%= link_to user.first_name, profile_path(user) %></small>
           <% end %>
         </div>
       </div>
