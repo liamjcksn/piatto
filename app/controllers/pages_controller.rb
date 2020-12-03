@@ -30,7 +30,7 @@ class PagesController < ApplicationController
       sim_dishes_for_dish.each { |d|
         recc_similar_dishes << d } if sim_dishes_for_dish
     end
-    @recc_similar_dishes = recc_similar_dishes
+    @recc_similar_dishes = recc_similar_dishes.uniq
     if params[:postcode].present?
       session[:postcode] = params[:postcode]
     end

@@ -5,7 +5,7 @@
     <div class="card-product-infos">
       <h2><%= dish.name %></h2>
       <p><%= dish.description %></p>
-      <p>£<%= dish.price %></p>
+      <p><%= "£#{sprintf('%.2f', (dish.price / 100.to_f).round(2))}" %></p>
     </div>
   </div>
 <% end %>
