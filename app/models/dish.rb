@@ -28,4 +28,15 @@ class Dish < ApplicationRecord
     end
     return similar_dishes
   end
+
+  def avg_rating
+    reviews = self.reviews
+    if reviews.empty?
+      return 0.0
+    else
+      reviews_count = reviews.count
+      avg_rating = reviews.pluck(:rating).reduce { |sum, r| sum + r } / reviews_count
+      return avg_rating
+    end
+  end
 end

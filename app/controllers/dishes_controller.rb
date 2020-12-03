@@ -20,7 +20,7 @@ class DishesController < ApplicationController
     @local_restaurant_ids += cookies[:local_restaurants_2]&.split("&")&.map { |string| string.to_i } || []
     @dish_available = @local_restaurant_ids.include?(@dish.restaurant.just_eat_id)
     unless @dish_available
-      @dishes = Dish.search_by_dish(@dish.name).sort_by { |dish| dish.average_rating }.reverse!
+      @dishes = Dish.search_by_dish(@dish.name).sort_by { |dish| dish.avg_rating }.reverse!
       @dishes = @dishes.select { |dish| @local_restaurant_ids.include?(dish.restaurant.just_eat_id) }
       @restaurants = @dishes.map { |dish| dish.restaurant if dish.restaurant.geocoded? }
       @markers = @restaurants.map do |restaurant|
