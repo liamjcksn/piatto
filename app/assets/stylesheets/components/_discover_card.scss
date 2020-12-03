@@ -1,8 +1,14 @@
 .discover-card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: fit-content;
+  width: 250px;
   border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.discover-card-user {
+  width: 300px;
 }
 
 .dc-img {
@@ -21,10 +27,41 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-around;
-  padding: 10px;
+  padding-top: 10px;
+  // justify-content: space-between;
 }
 
 .middle-section {
+  width: 100%;
   display: flex;
+  align-items: flex-start;
+}
+
+.restaurant-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.dc-btn {
+  margin-right: 50px;
+}
+
+.avatar-image {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.avatar-section {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.ratings {
+  align-items: center;
 }
