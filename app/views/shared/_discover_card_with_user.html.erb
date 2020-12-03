@@ -8,7 +8,7 @@
     <% end %>
     <div class="card-body dc-body px-1 mb-1 w-100">
       <div class="middle-section">
-        <div class="restaurant-info">
+        <div class="restaurant-info ml-2">
           <h5 class="card-title mb-2"><%= link_to dish.name, dish_path(dish) %></h5>
           <small><%= link_to dish.restaurant.name.upcase, restaurant_path(dish.restaurant.id), style: "color: #{valid_card ? '$pink' : '#B85253'}; font-size: 10px; padding: 0px;" %></small>
           <div class="ratings d-flex">
