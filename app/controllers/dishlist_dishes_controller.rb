@@ -1,11 +1,12 @@
 class DishlistDishesController < ApplicationController
   def create
     @dishlist_dish = DishlistDish.create(strong_params)
-    if @dishlist_dish.save!
+    if @dishlist_dish.save
+      
       flash[:notice] = "Dish saved to dishlist!"
-      redirect_back(fallback_location: root_path)
+      redirect_to search_path(anchor: "dish-#{@dishlist_dish.dish.id}", query: params[:query])
     else
-      redirect_back(fallback_location: root_path)
+      redirect_to search_path(anchor: "dish-#{@dishlist_dish.dish.id}", query: params[:query])
     end
   end
 
