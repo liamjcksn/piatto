@@ -18,6 +18,7 @@
           <%= f.submit 'Add to dishlist', class: "btn btn-warning ml-2 text-white" %>
           <%= render partial: '/shared/justeat_button', locals: { restaurant: @dish.restaurant } %>
           <% end %>
+          <div style="height: 30px;"></div>
         </div>
       <%= render 'review', dish: @dish %>
     </div>
