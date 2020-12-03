@@ -5,6 +5,7 @@ class DishlistDishesController < ApplicationController
       flash[:notice] = "Dish saved to dishlist!"
       redirect_back(fallback_location: root_path)
     else
+      flash[:error] = "You need to select a dishlist first!"
       redirect_back(fallback_location: root_path)
     end
   end

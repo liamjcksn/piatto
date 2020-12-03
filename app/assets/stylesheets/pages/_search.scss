@@ -12,3 +12,20 @@
   visibility: hidden;
   justify-content: center;
 }
+
+.restaurant-selector:hover {
+  opacity: 50%;
+}
+
+.search-search-postcode {
+  width: inherit;
+  border-radius: 0px;
+  border-top: 0;
+  border-right: 0;
+  background-color: rgba(0,0,0,0);
+}
+
+.search-search {
+  border-radius: 0px;
+  background-color: rgba(0,0,0,0);
+}

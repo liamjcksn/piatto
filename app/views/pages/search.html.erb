@@ -34,8 +34,18 @@
     <%= form_tag search_path, method: :get, class: 'search-search-field' do %>
       <%= hidden_field_tag :query, @query %>
       <%= text_field_tag :restaurant, params[:restaurant], class: "form-control search-search", placeholder: "Name of restaurant", required: true %>
-      <%= text_field_tag :postcode, params[:postcode] || session[:postcode], class: "form-control search-search", placeholder: "Full postcode where you were", required: true, pattern: '^([a-zA-Z]{0,2})([0-9][0-9]|[0-9]|[a-zA-Z][0-9][a-zA-Z]|[a-zA-Z][0-9][0-9]|[a-zA-Z][0-9])([ ]*)([0-9]{1,2})([a-zA-z][a-zA-z])$' %>
-      <%= submit_tag 'Find restaurant', class: 'btn btn-warning mt-2' %>
+
+
+      <div class="control-group d-flex align-items-start" style="width: 100%;">
+        <%= text_field_tag :postcode, params[:postcode] || session[:postcode], class: "form-control search-search-postcode", placeholder: "Full postcode", required: true, pattern: '^([a-zA-Z]{0,2})([0-9][0-9]|[0-9]|[a-zA-Z][0-9][a-zA-Z]|[a-zA-Z][0-9][0-9]|[a-zA-Z][0-9])([ ]*)([0-9]{1,2})([a-zA-z][a-zA-z])$' %>
+        <div class="form-actions d-inline-block">
+          <%= submit_tag 'Find restaurant', class: 'd-inline-block btn btn-warning', style: "border-radius: 0;" %>
+        </div>
+      </div>
+
+
+
+
     <% end %>
     <% if @restaurant_names %>
       <% @restaurant_names.each do |restaurant| %>
@@ -47,7 +57,7 @@
           <%= hidden_field_tag :postcode, restaurant[:postcode] %>
           <%= hidden_field_tag :url, restaurant[:url] %>
           <%= hidden_field_tag :logourl, restaurant[:logourl] %>
-          <%= submit_tag restaurant[:name] %>
+          <%= submit_tag restaurant[:name], style: "width: 100%; margin: 5px; overflow: hidden; border-radius: 5px; padding: 5px; border: 1px solid rgba(50, 50, 50, 0.2);", class: "restaurant-selector" %>
         <% end -%>
       <% end %>
     <% end %>
