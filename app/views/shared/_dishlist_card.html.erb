@@ -1,6 +1,7 @@
-<div class="card m-2" style="width: 18rem;">
+<%= link_to user_dishlist_path(dishlist.user_id, dishlist.id) do %>
+<div class="card m-2 dishlist-card shadow" style="width: 18rem;">
   <% if dishlist.photo.attached? %>
-    <%= cl_image_tag dishlist.photo.key, alt: "alttext", class: 'card-img-top' %>
+    <%= cl_image_tag dishlist.photo.key, alt: "alttext", class: 'card-img-top dishlist-card-img' %>
   <% end %>
   <div class="card-body w-100">
     <div class="d-flex flex-column w-100">
@@ -16,4 +17,4 @@
     </div>
   </div>
 </div>
-
+<% end %>
