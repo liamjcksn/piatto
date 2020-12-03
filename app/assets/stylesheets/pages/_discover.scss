@@ -1,5 +1,5 @@
 .discover-row {
   display: flex;
-  flex-wrap: none;
-  overflow: scroll;
+  flex-direction: row;
+  overflow-x: scroll;
 }
