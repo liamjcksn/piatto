@@ -1,7 +1,7 @@
 class DishlistDishesController < ApplicationController
   def create
     @dishlist_dish = DishlistDish.create(strong_params)
-    if @dishlist_dish.save!
+    if @dishlist_dish.save
       flash[:notice] = "Dish saved to dishlist!"
       redirect_back(fallback_location: root_path)
     else
