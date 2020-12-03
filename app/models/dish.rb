@@ -3,11 +3,10 @@ class Dish < ApplicationRecord
   has_many :dishlist_dishes
   has_many :dishlists, through: :dishlist_dishes
   has_many :reviews
-  
 
   include PgSearch::Model
   pg_search_scope :search_by_dish,
-                  against: [:name, :description],
+                  against: %i[name description],
                   # associated_against: {
                   #   restaurant: [:name]
                   # },
@@ -19,7 +18,6 @@ class Dish < ApplicationRecord
                   using: {
                     tsearch: { prefix: true } # <-- now `superman batm` will return something!
                   }
-
 
   def get_similar_dishes(n, cookies)
     tags = self.tags.split("&").map { |arr| arr.split("=") }.to_h.sort_by { |_, f| f } # or :tags

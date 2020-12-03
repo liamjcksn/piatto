@@ -8,7 +8,7 @@
             <%= image_tag "restaurant.svg", height: 20, class: "mb-2" %>
           <% end %><%= "(#{@dish.reviews.count} ratings)" %>
           <h5><em><%= link_to @dish.restaurant.name, restaurant_path(@dish.restaurant.id) %></em></h5>
-          <h5>£<%= @dish.price %></h5>
+          <h5><%= "£#{sprintf('%.2f', (@dish.price / 100.to_f).round(2))}" %></h5>
           <p><%= @dish.description %></p>
         </div>
         <div class="card-body-right">
@@ -34,7 +34,7 @@
           <div class="card-body-left">
             <h3><%= @dish.name %></h3>
             <h5><em><%= link_to @dish.restaurant.name, restaurant_path(@dish.restaurant.id) %></em></h5>
-            <h5>£<%= @dish.price %></h5>
+            <h5><%= "£#{sprintf('%.2f', (@dish.price / 100.to_f).round(2))}" %></h5>
             <p><%= @dish.description %></p>
           </div>
           <div class="card-body-right d-flex">
