@@ -29,7 +29,7 @@
     <h5>Sorry, no results in your area</h5>
   <% else %>
     <div class= 'show-top-container'>
-      <h3> <%= @dish.restaurant.name %> doesn't deliver to you. But some similar dishes from restaurants nearby! </h3>
+      <h3> <%= @dish.restaurant.name %> doesn't deliver to you. But there are some similar dishes from restaurants nearby! </h3>
       <%= render 'shared/map' %>
     </div>
     <% @dishes.each do |dish| %>
