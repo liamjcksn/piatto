@@ -13,10 +13,11 @@ class PagesController < ApplicationController
     followees_dishes = []
     current_user.followers.each do |user|
       user.dishlists.each do |dishlist|
-        followees_dishes << dishlist.dishes.order(average_rating: :desc).first(3)
+        followees_dishes_without_users = dishlist.dishes.order(average_rating: :desc).first(3)
+        followees_dishes << followees_dishes_without_users.map { |fdwu| [fdwu, user]}
       end
     end
-    @people_you_follow_have_been_enjoying = followees_dishes.flatten.sample(10)
+    @people_you_follow_have_been_enjoying = followees_dishes.flatten(1).sample(10)
     num_of_dishes = 3
     sim_dishes = []
     recc_similar_dishes = []

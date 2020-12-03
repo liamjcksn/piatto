@@ -19,7 +19,7 @@
         <small>NOT AVAILABLE NEARBY</small>
       <% end %>
       <div class="add-to-dishlist">
-        <%= simple_form_for(DishlistDish.new, html: { class: 'form-inline' }) do |f| %>
+        <%= simple_form_for(DishlistDish.new, html: { class: 'form-inline' }, remote: true) do |f| %>
           <div class="form-froup">
             <%= f.association :dishlist, collection: current_user.dishlists, label: false, input_html: { class: 'form-control dl-select' } %>
           </div>

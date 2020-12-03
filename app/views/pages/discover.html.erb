@@ -1,11 +1,9 @@
 <h1>Discover</h1>
-
-
 <% if !@people_you_follow.empty? %>
-  <h2>People you follow</h2>
-  <div class="row">
+  <h2 class="mt-5 mb-3">People you follow have been enjoying</h2>
+  <div class="row discover-row my-2 ml-1">
     <% @people_you_follow_have_been_enjoying.each do |dish| %>
-      <%= dish.name %>
+      <%= render 'shared/discover_card_with_user', dish: dish[0], user: dish[1] %>
     <% end %>
   </div>
 <% else %>
@@ -13,22 +11,21 @@
 <% end %>
 
 <% if !@recc_similar_dishes.empty? %>
-  <h2>Dishes you might enjoy</h2>
-  <div class="row">
+  <h2 class="mt-5 mb-3">Dishes you might enjoy</h2>
+  <div class="row discover-row my-2 ml-1">
     <% @recc_similar_dishes.each do |dish| %>
-      <%= dish.name %>
+      <%= render 'shared/discover_card', dish: dish %>
     <% end %>
   </div>
 <% else %>
   <p class="p-3"><em>Make some <strong>dishlists</strong> to see <strong>similar dishes</strong>.</em></p>
 <% end %>
 
-
 <% if !@people_you_follow.empty? %>
-  <h2>People you follow</h2>
-  <div class="row">
+  <h2 class="mt-5 mb-3">People you follow</h2>
+  <div class="row discover-row my-2 ml-1">
     <% @people_you_follow.each do |user| %>
-      <%= user.username %>
+      <%= render 'shared/user_card', user: user %>
     <% end %>
   </div>
 <% else %>
