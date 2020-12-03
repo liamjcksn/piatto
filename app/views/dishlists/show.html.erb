@@ -1,7 +1,7 @@
 <% if @dishlist.photo.attached? %>
   <div class="shadow"> <%= cl_image_tag @dishlist.photo.key, class: 'banner' %> </div>
 <% end %>
-<h1><%= @dishlist.name %></h1>
+<h1 class="mt-2 mb-4"><%= @dishlist.name %> <small><em>by <%= link_to @dishlist.user.username, profile_path(@dishlist.user) %></em></small></h1>
 
 <% @dishlist_dishes.each do |dishlist_dish| %>
 

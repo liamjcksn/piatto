@@ -15,7 +15,7 @@
   </div>
 <% end %>
 
-<div class="d-flex">
+<div class="d-flex flex-wrap">
   <% @user.dishlists.each do |dishlist| %>
     <%= render 'shared/dishlist_card', dishlist: dishlist %>
   <% end %>
