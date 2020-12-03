@@ -21,7 +21,7 @@
 
       <%= simple_form_for(DishlistDish.new, html: { class: 'form-inline' }) do |f| %>
       <div class="form-froup">
-        <%= f.association :dishlist, collection: current_user.dishlists, label: false, input_html: { class: 'form-control' } %>
+        <%= f.association :dishlist, collection: current_user.dishlists, label: false, input_html: { class: 'form-control dl-select' } %>
       </div>
       <div class="form-group">
         <%= f.input :dish_id, as: :hidden, input_html: { value: dish.id } %>

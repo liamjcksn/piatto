@@ -8,7 +8,7 @@
             <%= image_tag "restaurant.svg", height: 20, class: "mb-2" %>
           <% end %><%= "(#{@dish.reviews.count} ratings)" %>
           <h5><em><%= link_to @dish.restaurant.name, restaurant_path(@dish.restaurant.id) %></em></h5>
-          <h5>£<%= @dish.price %></h5>
+          <h5>£<%= @dish.price / 100.to_f %></h5>
           <p><%= @dish.description %></p>
         </div>
         <div class="card-body-right">
@@ -18,6 +18,7 @@
           <%= f.submit 'Add to dishlist', class: "btn btn-warning ml-2 text-white" %>
           <%= render partial: '/shared/justeat_button', locals: { restaurant: @dish.restaurant } %>
           <% end %>
+          <div style="height: 30px;"></div>
         </div>
       <%= render 'review', dish: @dish %>
     </div>
