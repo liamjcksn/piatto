@@ -13,7 +13,7 @@
           <h5><%= link_to dishlist_dish.dish.name, dish_path(dishlist_dish.dish), style: "color: #{valid_card ? '$pink' : '#B85253'}; font-size: 32px; margin: 0px; padding: 0px;" %></h5>
             <% dishlist_dish.dish.avg_rating.to_i.times do %>
               <%= image_tag "restaurant.svg", height: 20, class: "mb-2 mr-1" %>
-            <% end %><%= " (#{dishlist_dish.dish.reviews_count} ratings)" %>
+            <% end %><%= "(#{dishlist_dish.dish.reviews.count} ratings)" %>
           <h5><%= "£#{sprintf('%.2f', (dishlist_dish.dish.price / 100.to_f).round(2))}" %></h5>
           <p style="font-size: 14px;"><%= dishlist_dish.dish.description.truncate(200) %></p>
         </div>
