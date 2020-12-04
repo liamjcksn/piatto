@@ -44,7 +44,7 @@
           </div>
           <div class="card-body-right d-flex">
             <div class="left-box">
-              <%= simple_form_for(DishlistDish.new, html: { class: 'form-inline' }) do |f| %>
+              <%= simple_form_for(DishlistDish.new, html: { class: 'form-inline' }, remote: true) do |f| %>
               <div class="form-froup">
               <%= f.association :dishlist, collection: current_user.dishlists, label: false, input_html: { class: 'form-control' } %>
               </div>
