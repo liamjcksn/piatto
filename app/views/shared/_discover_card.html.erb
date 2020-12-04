@@ -14,7 +14,7 @@
           <div class="ratings d-flex">
             <% dish.reviews.count.times do %>
               <%= image_tag "restaurant.svg", height: 20, class: "card-subtitle text-muted" %>
-            <% end %><small><%= "(#{dish.reviews_count} ratings)" %></small>
+            <% end %><small><%= "(#{dish.reviews.count} ratings)" %></small>
           </div>
         </div>
       </div>
