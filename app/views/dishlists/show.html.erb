@@ -27,15 +27,19 @@
               </div>
             <% else %>
               <div class="card-body-right">
-                <%= simple_form_for DishlistDish.new do |f| %>
+                <%= simple_form_for(DishlistDish.new, html: { class: 'form-inline' }, remote: true) do |f| %>
                 <%= f.association :dishlist, collection: current_user.dishlists, label: false %>
                 <%= f.input :dish_id, as: :hidden, input_html: { value: dishlist_dish.dish.id } %>
-                <%= f.submit class: 'btn btn-warning' %>
+                <%= f.submit 'Add to Dishlist', class: 'btn btn-warning' %>
                 <% end %>
               </div>
             <% end %>
           <% else %>
-            <small>NOT AVAILABLE NEARBY</small>
+            <div class="card-links">
+              <small>NOT AVAILABLE NEARBY</small>
+              <div class="delete-item btn btn-danger">Remove from dishlist <i class="far fa-trash-alt" style="font-size: 20px;"></i></div>
+              <%= link_to "", dishlist_dish_path(dishlist_dish.id), method: :delete, class: "hidden delete-link", remote: true %>
+            </div>
           <% end %>
         </div>
       </div>

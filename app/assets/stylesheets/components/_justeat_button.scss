@@ -1,8 +1,10 @@
 .justeat_button_container {
   min-width: 165px;
+  position: relative;
 }
 
 .justeat_button {
+  position: relative;
   font-size: 12px;
   font-weight: 500;
   text-indent: 20px;
@@ -19,8 +21,10 @@
 }
 
 .button-logo {
-  position: relative;
-  left: 30px;
+  position: absolute;
+  left: 20px;
+  top: 5px;
   width: 20px;
-
+  z-index: 1;
 }
+
