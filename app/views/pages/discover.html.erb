@@ -1,7 +1,7 @@
 <h1>Discover</h1>
 <% if !@people_you_follow.empty? %>
   <h2 class="mt-5 mb-3">People you follow have been enjoying</h2>
-  <div class="row discover-row my-2 ml-1">
+  <div class="row discover-row my-2">
     <% @people_you_follow_have_been_enjoying.each do |dish| %>
       <%= render 'shared/discover_card_with_user', dish: dish[0], user: dish[1] %>
     <% end %>
@@ -23,7 +23,7 @@
 
 <% if !@people_you_follow.empty? %>
   <h2 class="mt-5 mb-3">People you follow</h2>
-  <div class="row discover-row my-2 ml-1">
+  <div class="row discover-row my-2 ">
     <% @people_you_follow.each do |user| %>
       <%= render 'shared/user_card', user: user %>
     <% end %>
