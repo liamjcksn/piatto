@@ -1,12 +1,12 @@
 <% valid_card = local_restaurants_array.include?(dish.restaurant.just_eat_id) && controller_name != 'restaurants' %>
-<div class="card discover-card pb-3">
+<div class="discover-card" style="width: 18rem;">
   <%= link_to dish_path(dish.id) do %>
     <% dish.reviews.each do |review| %>
       <% if review.photos.attached? %>
         <%= cl_image_tag review.photos[0].key, height: 150, alt: "alttext", class: 'dc-img' %>
       <% end %>
     <% end %>
-    <div class="card-body dc-body mb-1 w-100">
+    <div class="dc-body mb-1 w-100">
       <div class="middle-section">
         <div class="restaurant-info">
           <h5 class="card-title"><%= link_to dish.name, dish_path(dish) %></h5>
@@ -19,11 +19,14 @@
         </div>
       </div>
     </div>
-    <% if valid_card %>
-      <%= render 'shared/justeat_button', restaurant: dish.restaurant, class: 'dc-btn' %>
-    <% else %>
-      <small>NOT AVAILABLE NEARBY</small>
-    <% end %>
+    <div class="justeat">
+      <% if valid_card %>
+        <%= render 'shared/justeat_button', restaurant: dish.restaurant, class: 'dc-btn' %>
+      <% else %>
+        <small>NOT AVAILABLE NEARBY</small>
+      <% end %>
+    </div>
+
   <% end %>
 </div>
 
