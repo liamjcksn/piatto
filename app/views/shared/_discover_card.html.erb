@@ -12,7 +12,7 @@
           <h5 class="card-title"><%= link_to dish.name, dish_path(dish) %></h5>
           <small><%= link_to dish.restaurant.name.upcase, restaurant_path(dish.restaurant.id), style: "color: #{valid_card ? '$pink' : '#B85253'}; font-size: 10px; padding: 0px;" %></small>
           <div class="ratings d-flex">
-            <% dish.reviews.count.times do %>
+            <% dish.avg_rating.to_i.times do %>
               <%= image_tag "restaurant.svg", height: 20, class: "card-subtitle text-muted" %>
             <% end %><small><%= "(#{dish.reviews.count} ratings)" %></small>
           </div>
